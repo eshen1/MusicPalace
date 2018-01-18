@@ -26,6 +26,11 @@
     color: #f1f1f1;
 }
 
+.player {
+  bottom: 0;
+  text-align: center;
+}
+
 /* Style page content */
 #main {
     margin-left: 160px; /* Same as the width of the sidebar */
