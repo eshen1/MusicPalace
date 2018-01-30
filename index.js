@@ -7,3 +7,11 @@ $( ".sidenav a +" ).click(function() {
         document.getElementById("plus").prepend(node);
     }
 });
+
+$('#search').click(function() {
+  let xhr = new XMLHttpRequest();
+  xhr.open("GET", "/2.0/?method=album.getinfo&api_key=YOUR_API_KEY&artist=Cher&album=Believe", false);
+  xhr.send();
+  console.log(xhr.status);
+  console.log(xhr.statusText);
+});
