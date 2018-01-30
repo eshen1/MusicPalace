@@ -10,7 +10,7 @@ $( ".sidenav a +" ).click(function() {
 
 $('#search').click(function() {
   let xhr = new XMLHttpRequest();
-  xhr.open("GET", "/2.0/?method=album.getinfo&api_key=YOUR_API_KEY&artist=Cher&album=Believe");
+  xhr.open("GET", "/2.0/?method=album.getinfo&api_key=947d8c62467598874b98abe12a96a637&artist=Cher&album=Believe");
   xhr.send();
   console.log(xhr.status);
   console.log(xhr.statusText);
