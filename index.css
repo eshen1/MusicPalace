@@ -1,19 +1,47 @@
+#homepage {
+  display: none;
+}
+
+#all {
+  background-color: rgba(181, 197, 202, 0.5);
+}
+
+#loginpage {
+  height: 100%;
+  width: 100%;
+  font-family: 'Roboto Mono', monospace;
+  background-color: rgba(181, 197, 202, 0.5);
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+/* Going to add image later */
+/*#backg {
+  z-index: -1;
+  background-image: url("docs/presentation/Slide5.png");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}*/
+
 .sidenav {
-    height: 100%; /* Full-height: remove this if you want "auto" height */
-    width: 160px; /* Set the width of the sidebar */
-    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-    z-index: 1; /* Stay on top */
-    top: 0; /* Stay at the top */
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
     left: 0;
-    font-family: 'Monoton', cursive;
     box-shadow: 4px 0 5px 0 grey;
     text-shadow: 2px 2px 2px red;
-    background-color: #312e2e; /* Beige */
-    overflow-x: hidden; /* Disable horizontal scroll */
+    background-color: #312e2e;
+    overflow-x: hidden;
     padding-top: 20px;
 }
 
-/* The navigation menu links */
 .sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
@@ -37,14 +65,11 @@
   text-decoration: none;
   font-size: 25px;
   display: block;
-  font-family: 'Roboto Mono', monospace;
   box-shadow: 4px 0 5px 0 grey;
   text-shadow: 2px 2px 2px red;
   background-color: #312e2e;
 }
 
-
-/* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
     color: #f1f1f1;
 }
@@ -63,6 +88,12 @@ input.searchTerm {
   background: rgba(181, 197, 202, 0.5);
 }
 
+#main {
+    margin-left: 160px; /* Same as the width of the sidebar */
+    height: 100%;
+    width: 100%;
+}
+
 .player {
   position: fixed;
   bottom: 20px;
@@ -70,13 +101,28 @@ input.searchTerm {
   text-align: center;
 }
 
-/* Style page content */
-#main {
-    margin-left: 160px; /* Same as the width of the sidebar */
-    height: 100%;
-    width: 100%;
+#label {
+  text-align: center;
+  padding: 5px;
+  font-family: 'Monoton', cursive;
+  box-shadow: 4px 0 5px 0 grey;
+  text-shadow: 2px 2px 2px red;
+  color: #6accc5;
+  background-color: #312e2e;
+
 }
 
-#all {
-  background-color: rgba(181, 197, 202, 0.5);
+#user{
+  text-align: center;
+  padding: 5px;
+}
+
+#pass{
+  text-align: center;
+  padding: 5px;
+}
+
+#buttons{
+  text-align: center;
+  padding: 5px;
 }

@@ -1,5 +1,5 @@
 $( ".sidenav a +" ).click(function() {
-  var person = prompt("Please enter your music palace Name", "Music");
+  let person = prompt("Please enter your music palace Name", "Music");
     if (person != null) {
         let node = document.createElement("div");
         let textnode = document.createTextNode(person);
@@ -7,6 +7,23 @@ $( ".sidenav a +" ).click(function() {
         document.getElementById("plus").prepend(node);
     }
 });
+// <script type="text/javascript">
+//     function showHomePage(homepage){
+//     document.getElementById(homepage).style.display = 'block';
+//     }
+//   </script>
+
+$("#buttons").click(function() {
+  document.getElementById('homepage').style.display = 'block';
+  document.getElementById('loginpage').style.display = 'none';
+});
+
+// $(document).ready(function(){
+//     $("button").click(function(){
+//       document.getElementById('homepage').style.display = 'block';
+//     	document.getElementById('homepage').style.visibility = 'visible';
+//     });
+// });
 
 $('#search').click(function() {
   let xhr = new XMLHttpRequest();

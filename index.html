@@ -1,14 +1,14 @@
 <!doctype html>
 <html id ='all'>
-  <link rel="stylesheet" href="index.css">
+  <link rel='stylesheet' href='index.css'>
   <head>
   <title> Music Palace </title>
-  <link href="https://fonts.googleapis.com/css?family=Dhurjati|Dosis|Josefin+Sans|Roboto+Mono|Ubuntu" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Contrail+One|Josefin+Sans|Monoton|Prompt" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Dhurjati|Dosis|Josefin+Sans|Roboto+Mono|Ubuntu' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Contrail+One|Josefin+Sans|Monoton|Prompt' rel='stylesheet'>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css'>
 
-  <script src="audiojs/audiojs/audio.min.js"></script>
+  <script src='audiojs/audiojs/audio.min.js'></script>
   <script>
     audiojs.events.ready(function() {
       audiojs.createAll();
@@ -18,23 +18,45 @@
   </head>
 
   <body>
-    <div class="sidenav">
-    <a href="#Home">Home</a>
-    <div id="plus">+</div>
-    </div>
-      <div id="main">
-        <div id = "search"><input type="text" class="searchTerm" placeholder="Search.."></div>
-        <div class="player">
-          <audio preload="auto">
-            <source src="mp3/meat.mp3">
-        </audio>
+    <div id='loginpage'>
+      <div id ='label'><h2>Login Page</h2></div>
+      <!-- <div id="backg"></div> -->
+      <div class='container'>
+        <div id ='user'>
+          <label><b>Username</b></label>
+          <input type='text' placeholder='Enter Username' name='uname'>
+        </div>
+        <div id='pass'>
+          <label><b>Password</b></label>
+          <input type='password' placeholder='Enter Password' name='psw'>
+        </div>
+        <div id='buttons'>
+          <button type='button'>Login</button>
+        </div>
+        <div id='buttons'>
+          <button type='button'>Register</button>
         </div>
       </div>
+    </div>
 
+    <div id='homepage'>
+      <div class='sidenav'>
+        <a href='#Home'>Home</a>
+        <div id='plus'>+</div>
+      </div>
+        <div id='main'>
+          <div id = 'search'><input type='text' class='searchTerm' placeholder='Search..'></div>
+          <div class='player'>
+            <audio preload='auto'>
+              <source src='mp3/meat.mp3'>
+          </audio>
+          </div>
+        </div>
+    </div>
   </body>
 
 
-  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script src="index.js"></script>
+  <script src='https://code.jquery.com/jquery-1.11.3.min.js'></script>
+  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+  <script src='index.js'></script>
 </html>
