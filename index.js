@@ -27,7 +27,7 @@ $("#buttons").click(function() {
 
 $('#search').click(function() {
   let xhr = new XMLHttpRequest();
-  xhr.open("GET", "/2.0/?method=album.getinfo&api_key=947d8c62467598874b98abe12a96a637&artist=Cher&album=Believe");
+  xhr.open("GET", "http://ws.audioscrobbler.com/2.0/?method=track.search&track=Believe&api_key=947d8c62467598874b98abe12a96a637");
   xhr.send();
   console.log(xhr.status);
   console.log(xhr.statusText);
