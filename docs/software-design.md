@@ -31,9 +31,11 @@
 
 ### 5.3.3	Database
   - 5.2.3.1 The database will have a table containing data about each playlist
+    - 5.2.3.1.1 The database will have a table containing data about each song
+    - 5.2.3.1.2 The database will have a table containing data about each album
+    - 5.2.3.1.3 The database will have a table containing data about each genre
   - 5.2.3.2 The database will contain data about the owner of each account
-  - 5.2.3.3 The database will contain data about the songs in each playlist
-  - 5.2.3.4 The database will have a table containing info about each user
+  - 5.2.3.3 The database will have a table containing info about each user
 
 ## 5.3	Performance Requirements
   - 5.3.1 User registration should be less than 3 minutes. Once the user registers
@@ -43,8 +45,13 @@
   home page.
   - 5.3.3 User logout should take less than 0.5 seconds. Once the user logs out, the web
     directs the user to the login page.
-  - 5.3.4 User searching up song should take less than 1 second.
+  - 5.3.4 When a user searches a song, the list of results should appear within 1 second.
   - 5.3.5 User making a new playlist should take less than .5 seconds
+  - 5.3.6 User adding a song to a playlist should take less than .5 seconds
+  - 5.3.7 User deleting a song from a playlist should take less than .5 seconds
+  - 5.3.8 When a user clicks the 'play' button on a playlist, the first song in the playlist should start playing almost instantly.
+  - 5.3.9 When a user clicks the 'play' button on a song, the song should play instantly.
+
 
 ## 5.4	Project Environment Requirements
 
