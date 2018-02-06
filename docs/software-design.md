@@ -43,7 +43,8 @@
   home page.
   - 5.3.3 User logout should take less than 0.5 seconds. Once the user logs out, the web
     directs the user to the login page.
-  - 5.3.4
+  - 5.3.4 User searching up song should take less than 1 second.
+  - 5.3.5 User making a new playlist should take less than .5 seconds
 
 ## 5.4	Project Environment Requirements
 
