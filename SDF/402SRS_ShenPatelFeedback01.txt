@@ -1,0 +1,24 @@
+MusicPalace Project SRS Evaluation
+==================================
+
+Nice job on this, a very good work.
+
+Some suggestions.
+
+Be careful specifying things like "almost instantly" -- that's hard to
+quantify.  Instead set some upper bound and say within that limit.  For
+example, in requirement "5.3.8" specify it as "within one second".
+
+These are "philosophy of requirements" issues that you can apply in a
+*general* way to nearly all the requirements in the document.  However,
+in the essence of time remaining, I'm assigning full credit to this
+deliverable, for both the initial and the final submissions.
+
+You don't have to do anything further with this document if you don't
+feel the need to do so.
+
+Deliverable D-02: 15% out of 15% = 100% which is an A-plus
+Deliverable D-05:  5% out of  5% = 100% which is an A-plus
+
+Keep up the good work!
+
