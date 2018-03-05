@@ -65,9 +65,9 @@ The system objective of MusicPalace is to serve as a online database for music t
 - Playlists Class -- Deals with the storage of songs and managing playlists
 
 ## 6.3.1.1   Detailed Class Description 1
-                  .
-                  .
-                  .
+
+-6.3.1.2
+
 ## 6.3.1.n   Detailed Class Description n
 ## 6.3.2     Detailed Interface Descriptions
 ## 6.3.3     Detailed Data Structure Descriptions
