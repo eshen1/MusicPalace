@@ -1,5 +1,6 @@
 ## 4.1   Plan Introduction
   This software development plan provides the details of the planned development for the Music Palace. Music Palace provides an application for users to store, organize, and play their favorite music. The primary function of this application is to store music. MusicPalace will be designed to provide users with a simple and clean user interface to find and listen to music. Functionality will include features such as searching for songs, uploading songs, and organizing the songs into playlists. Milestones that must be completed as part of the development plan include designing and developing the front end, creating a music player, finding an existing database of music for users to search, designing and building our own database, and creating playlists.
+
 ## 4.1.1 Project Deliverables
 | Deliverable | Description | Due Date |
 |---|---|
@@ -15,6 +16,7 @@
 | FINAL Project Presentation | Presentation of the final form of Music Palace. | Week 17 |
 | Oral Status Reports | SCRUM to state what has been completed the previous week, what will be completed the following week, and any issues the team is experiencing. | Every Class |
 | Written Status Reports or Quad Charts in SDF | Status reports in written form. | Every other Tuesday starting in week 9 |
+
 ## 4.2   Project Resources
 ## 4.2.1 Hardware Resources
 ## 4.2.2 Software Resources
