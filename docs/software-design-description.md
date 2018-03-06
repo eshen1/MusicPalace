@@ -17,6 +17,9 @@ The system objective of MusicPalace is to serve as a online database for music t
 
 ## 6.2       Architectural Design
 
+The Music Palace graphical user interface will be constructed using javascript and the Bootstrap toolkit.
+Music Palace will be using Napster services to search and play songs. Music Palace will use a Neo4j database to store its data.
+
 ## 6.2.1     Major Software Components
 
 - Login Page
@@ -30,7 +33,7 @@ The system objective of MusicPalace is to serve as a online database for music t
 - List Module
   - This list module will display a list of the users playlists
 - New playlist button
-  - This button will allow the user to create a new bank
+  - This button will allow the user to create a new playlist
 - Music player
   - A music player at the bottom of the screen to allow a user to play the song
 
@@ -81,6 +84,14 @@ The system objective of MusicPalace is to serve as a online database for music t
 - 6.3.1.4 Playlists Class -- Deals with the storage of songs and managing playlists
 
 ## 6.3.2     Detailed Interface Descriptions
+
+- Front End CSC
+  - Login/Join CSU -- This page will allow the users the log in or sign up for a Music Palace account. There will be a form that will ask for the username and password, with a Login Button underneath. When the user logs in to their account, they will be taken to the Home Page. If the user chooses to Join, a new form will appear for the user to enter their information. When a new user joins, they will be taken to the Home Page displaying a search bar for the user to search for a song.
+  - Home Page CSU -- The Home Page CSU will have a side bar that displays all of the user's playlists. The first playlist displayed will automatically default to the user's first playlist that was created. The playlist will show a list of all the songs that are saved under that playlist. The Home Page will also have a search bar that allows the user to search for more songs.
+    - Search Bar module -- The Search Bar module will be comprised of a search bar with a button that prompts the user to search for songs. When the user enters a search term and presses the 'search' button, the user will be directed to the Search Results CSU.
+  - Search Results CSU -- The Search Results CSU will show a list of song titles accompanied by an icon that shows an image of the album's cover that the song belongs to. Each song will have a 'play' button next to it, that will allow the user to play the song. Each song will also have an 'add to playlist' option.
+  - Playlist Display module -- The Playlist Display module will display all the songs that are included in a certain playlist. The Playlist Display module will have a 'shuffle' button that will play all the songs in the playlist in shuffled order. The Playlist Display Module will also have an 'edit' button that will allow users to delete songs from the selected playlist.
+
 ## 6.3.3     Detailed Data Structure Descriptions
 
 - User Data Structure
@@ -92,7 +103,7 @@ The system objective of MusicPalace is to serve as a online database for music t
   - Updated_at -- The date and timestamp that the user account has been modified at. This can be either change of password or username. This holds datetime value
 
 - Playlist Data Structure
-  - Title -- This is the name of the Bank, it does not have to be unique. This is a string value
+  - Title -- This is the name of the Playlist, it does not have to be unique. This is a string value
   - Size -- Size is how many song are inside of the database. This holds an integer
   - Update -- Called when the playlist is updated and adds songs to the current playlist
 
