@@ -34,8 +34,9 @@
 |--------------------- | ------------- | -----------|
 |Google Chrome         | ✓             | ✓          |
 |Atom Text Editor      | ✓             |            |
-|Ruby on Rails         | ✓             |            |
-|React.js              | ✓             | ✓          |
+|Node                  | ✓             |            |
+|Javascript            | ✓             | ✓          |
+|HTML                  | ✓             | ✓          |
 |macOS                 | ✓             | ✓          |
 |Windows OS            | ✓             | ✓          |
 |GitHub                | ✓             |            |
