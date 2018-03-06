@@ -120,6 +120,15 @@ The MusicPalace database contains users, playlists, and songs. The database we a
 ![Database Design ERD](database_design_erd.PNG)
 
 ## 6.4.2     Database Access
+
+Music Palace's database access is handled through two main methods:
+- Automatic queries:
+  - These are the queries performed when creating the database and when there is data being added to, modified, or removed from the database.
+  - Any person who uses the application will be accessing the database in this manner.
+- Migrations:
+  - These are Neo4j queries that allow a person to change the database schema without disrupting the application or the data.
+  - Only those with access to the development of the Music Palace application will have the ability to perform migrations.
+
 ## 6.4.3     Database Security
 
 We will be using OAuth for the database security.
