@@ -19,7 +19,28 @@
 
 ## 4.2   Project Resources
 ## 4.2.1 Hardware Resources
+
+| Resource | Development | Execution |
+|---|---|---|
+| Macbook/Windows Computer | ✓ | ✓ |
+| Intel HD Graphics 4600 Graphics Card | ✓ | ✓ |
+| 8 GB RAM | ✓ | ✓ |
+| Internet Connectivity | ✓ | ✓ |
+| 16 GB Storage | ✓ | ✓ |
+
 ## 4.2.2 Software Resources
+
+|Resource              | Development   | Execution  |
+|--------------------- | ------------- | -----------|
+|Google Chrome         | ✓             | ✓          |
+|Atom Text Editor      | ✓             |            |
+|Ruby on Rails         | ✓             |            |
+|React.js              | ✓             | ✓          |
+|macOS                 | ✓             | ✓          |
+|Windows OS            | ✓             | ✓          |
+|GitHub                | ✓             |            |
+|Neo4j                 | ✓             |            ||
+
 ## 4.3   Project Organization
 
 The project roles are laid out in the below chart. Although certain items are assigned to a specific team member, most of the items will be a collaborative effort since there is overlap between the different functionalities.
