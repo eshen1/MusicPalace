@@ -62,6 +62,9 @@ The project roles are laid out in the below chart. Although certain items are as
 
 This section provides schedule information for the Music Palace project. The full details will be broken down into the following sections, which are described below.
 
-## 4.4.1 PERT / GANTT Chart
-## 4.4.2 Task / Resource Table
-## 4.4.3 Class Schedule (optional)
+### 4.4.1 GANTT Chart
+
+![GANTT chart](schedule.png)
+
+### 4.4.2 Task / Resource Table
+### 4.4.3 Class Schedule (optional)
