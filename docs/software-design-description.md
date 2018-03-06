@@ -113,6 +113,9 @@ Music Palace will be using Napster services to search and play songs. Music Pala
 The MusicPalace database contains users, playlists, and songs. The database we are using at the moment is Neo4j, because we want to show relations between songs so we can recommend songs to the user on their homepage. The database itself is being designed in the standard of Neo4j, which can be used to find relationships and implement some machine learning.
 
 ## 6.4.1     Database Design ER Diagram
+
+![Database Design ERD](database_design_erd.PNG)
+
 ## 6.4.2     Database Access
 ## 6.4.3     Database Security
 
