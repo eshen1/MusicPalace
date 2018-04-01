@@ -1,3 +1,4 @@
+const ACCESS_TOKEN = 'BQCg3z_RqMGAmGE5zO7H0fHpFpJOjntGQH7ysRb9uU4gpFvjrSgluwrfTQ6WyIPv5mSWcOnLpATQIs54PimE-jvyfKtjeJ7U7Dq5H6xLoYZK1MQqCNupFGScTO47ARIJoPJkmfji2RyjXN5SxNXxqQjlGuDPsGTcDI73yZ--M1BQ';
 
 
 $( '.sidenav a +' ).click(function() {
@@ -79,12 +80,12 @@ $('#buttons').click(function() {
 $('#searchButton').click(function () {
   let searchQuery = document.getElementById('searchTerm').value;
   console.log(searchQuery);
-  let access_token = 'BQCg3z_RqMGAmGE5zO7H0fHpFpJOjntGQH7ysRb9uU4gpFvjrSgluwrfTQ6WyIPv5mSWcOnLpATQIs54PimE-jvyfKtjeJ7U7Dq5H6xLoYZK1MQqCNupFGScTO47ARIJoPJkmfji2RyjXN5SxNXxqQjlGuDPsGTcDI73yZ--M1BQ';
+  // let access_token = 'BQCg3z_RqMGAmGE5zO7H0fHpFpJOjntGQH7ysRb9uU4gpFvjrSgluwrfTQ6WyIPv5mSWcOnLpATQIs54PimE-jvyfKtjeJ7U7Dq5H6xLoYZK1MQqCNupFGScTO47ARIJoPJkmfji2RyjXN5SxNXxqQjlGuDPsGTcDI73yZ--M1BQ';
     $.ajax({
         type: 'GET',
         url: 'https://api.spotify.com/v1/search?q=' + searchQuery + '&type=track&market=us&limit=10&offset=5',
         headers: {
-            'Authorization': 'Bearer ' + access_token
+            'Authorization': 'Bearer ' + ACCESS_TOKEN
         },
         success: function (response) {
           processResults(response);
@@ -92,6 +93,46 @@ $('#searchButton').click(function () {
           console.log(response);
         }
     });
+});
+
+$('#searchresults').click(function(){
+
+
+
+// curl -X "PUT" "https://api.spotify.com/v1/me/player/play?device_id=12967c87accca1114dff634933e2bea20d79475c"
+// --data "{\"context_uri\":\"spotify:album:4I4xtHaIFOzhZfp1NIHkY6\",\"offset\":{\"position\":5}}"
+// -H "Accept: application/json"
+// -H "Content-Type: application/json"
+// -H "Authorization: Bearer BQC"
+
+
+
+$.ajax({
+    type: 'PUT',
+    url: 'https://api.spotify.com/v1/me/player/play?device_id=12967c87accca1114dff634933e2bea20d79475c',
+    data: {
+      "context_uri": "spotify:album:4LH4d3cOWNNsVw41Gqt2kv"
+    },
+    headers: {
+        'Authorization': 'Bearer ' + ACCESS_TOKEN,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+
+    }
+    // success: function (response) {
+    //   return reponse;
+    // //  processResults(response);
+    //   //$('#searchresults').append(data.tracks.items[0].album.images[0].url);
+    // //  console.log(response);
+    // }
+});
+
+
+
+console.log('ok');
+
+
+
 });
 
 let processResults = function(response) {
@@ -104,5 +145,5 @@ let processResults = function(response) {
     albumIcon.style.width = '100px';
     albumIcon.style.height = '100px';
     $('#searchresults').append(albumIcon);
-    $('#searchresults').append(response.tracks.items[0]);
+    $('#searchresults').append(response);
 };
