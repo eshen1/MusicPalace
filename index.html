@@ -44,8 +44,7 @@
         <div id='plus'>+</div>
       </div>
         <div id='main'>
-          <div id = 'search'><input type='text' id='searchTerm' class='searchTerm' placeholder='Search..'></div>
-            <button id="searchButton">Click here</button>
+          <div id = 'search'><input type='text' id='searchTerm' class='searchTerm' placeholder='Search..'><button id="searchButton">Search Music</button></div>
           <div> <p id='searchresults'> </p></div>
           <div class='player'>
             <audio preload='auto'>
@@ -62,7 +61,7 @@
   <script src="https://sdk.scdn.co/spotify-player.js"></script> --> -->
   <script>
     window.onSpotifyWebPlaybackSDKReady = () => {
-      const token = 'BQDwmevy00RX5_mtzbbqIAP7S3CrKc9JknXuoEbmobZzv0Vo7BMQZmGys4UhH-AAND0Yjo3p40vbv7FWv1ydLzE0AzBqmgMsp4OzQAKdu8O97IM-YVgFdirJ3gMr0E3t-91aVraQpuSnexIwYgKrxijTzvKovHxArp-jz_SIgtT3';
+      const token = 'BQCg3z_RqMGAmGE5zO7H0fHpFpJOjntGQH7ysRb9uU4gpFvjrSgluwrfTQ6WyIPv5mSWcOnLpATQIs54PimE-jvyfKtjeJ7U7Dq5H6xLoYZK1MQqCNupFGScTO47ARIJoPJkmfji2RyjXN5SxNXxqQjlGuDPsGTcDI73yZ--M1BQ';
       const player = new Spotify.Player({
         name: 'Web Playback SDK Quick Start Player',
         getOAuthToken: cb => { cb(token); }

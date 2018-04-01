@@ -20,10 +20,66 @@ $('#buttons').click(function() {
   document.getElementById('loginpage').style.display = 'none';
 });
 
-$('#search').click(function () {
+// $(document).ready(function(){
+//     $('button').click(function(){
+//       document.getElementById('homepage').style.display = 'block';
+//     	document.getElementById('homepage').style.visibility = 'visible';
+//     });
+// });
+
+
+// $('#search').click(function () {
+//   let clientID = '0442afbef13c432d8d617507b9ba89ab';
+//   let clientSecret = '2b100f45ee0e43b1ab61a6607238618e';
+//     $.ajax({
+//         type: 'POST',
+//         url: 'https://accounts.spotify.com/api/token',
+//         headers: {
+//             'Access-Control-Allow-Origin': '*',
+//             'Access-Control-Allow-Credentials': 'true',
+//             'Authorization': 'Basic ' + btoa(clientID + ':' + clientSecret)
+//         },
+//         dataType: 'jsonp',
+//         data: {'grant_type': 'client_credentials'},
+//         // success: function (xhr) {
+//         //     console.log(xhr.status);
+//         //     console.log(xhr.statusText);
+//         //     console.log(xhr.response);
+//         // }
+//     });
+// });
+
+// $('#search').click(function() {
+//   let clientID = '0442afbef13c432d8d617507b9ba89ab';
+//   let clientSecret = '2b100f45ee0e43b1ab61a6607238618e';
+//   let xhr = new XMLHttpRequest();
+//   xhr.open('POST', 'https://accounts.spotify.com/api/token');
+//   xhr.setRequestHeader('Authorization', 'Basic' + btoa(clientID + ':' +clientSecret));
+//   xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+//   xhr.send();
+//   console.log(xhr.status);
+//   console.log(xhr.statusText);
+//   console.log(xhr.response);
+// //  $('#searchresults').append(xhr.response);
+// });
+
+// $('#search').click(function() {
+//   let access_token = 'BQALR57LX1rC2eaq7aE8dCD28HfMKepITm0_i6HWK9Vn118NOk7RXhh6dv3gWnDxZI8H_KrKbRWss_CHJXVZq57SwB8_2LxWPD0TOzgv9QX-k-aH82Mjl7V9g5hZri7tpP0E80CVZQLgd7ZnurthdIFbYIJx_FAw5CKTMDugoA';
+//   let xhr = new XMLHttpRequest();
+//   xhr.open('GET', 'https://api.spotify.com/v1/search?q=live&type=track&market=us&limit=10&offset=5', false);
+//   xhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
+//   xhr.send();
+//   // console.log(xhr.status);
+//   // console.log(xhr.statusText);
+//   // console.log(xhr.response);
+//   $('#searchresults').append(xhr.response);
+//   console.log(xhr.response);
+// });
+
+$('#searchButton').click(function () {
   let searchQuery = document.getElementById('searchTerm').value;
   console.log(searchQuery);
-  let access_token = 'BQDwmevy00RX5_mtzbbqIAP7S3CrKc9JknXuoEbmobZzv0Vo7BMQZmGys4UhH-AAND0Yjo3p40vbv7FWv1ydLzE0AzBqmgMsp4OzQAKdu8O97IM-YVgFdirJ3gMr0E3t-91aVraQpuSnexIwYgKrxijTzvKovHxArp-jz_SIgtT3';
+  let access_token = 'BQCg3z_RqMGAmGE5zO7H0fHpFpJOjntGQH7ysRb9uU4gpFvjrSgluwrfTQ6WyIPv5mSWcOnLpATQIs54PimE-jvyfKtjeJ7U7Dq5H6xLoYZK1MQqCNupFGScTO47ARIJoPJkmfji2RyjXN5SxNXxqQjlGuDPsGTcDI73yZ--M1BQ';
     $.ajax({
         type: 'GET',
         url: 'https://api.spotify.com/v1/search?q=' + searchQuery + '&type=track&market=us&limit=10&offset=5',
