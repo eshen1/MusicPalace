@@ -110,14 +110,13 @@ $('#searchresults').click(function(){
 $.ajax({
     type: 'PUT',
     url: 'https://api.spotify.com/v1/me/player/play?device_id=12967c87accca1114dff634933e2bea20d79475c',
-    data: {
+    body: {
       "context_uri": "spotify:album:4LH4d3cOWNNsVw41Gqt2kv"
     },
     headers: {
         'Authorization': 'Bearer ' + ACCESS_TOKEN,
         'Accept': 'application/json',
         'Content-Type': 'application/json'
-
     }
     // success: function (response) {
     //   return reponse;
