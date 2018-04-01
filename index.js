@@ -1,88 +1,52 @@
-$( ".sidenav a +" ).click(function() {
-  let person = prompt("Please enter your music palace Name", "Music");
+
+
+$( '.sidenav a +' ).click(function() {
+  let person = prompt('Please enter your music palace Name', 'Music');
     if (person != null) {
-        let node = document.createElement("div");
+        let node = document.createElement('div');
         let textnode = document.createTextNode(person);
         node.appendChild(textnode);
-        document.getElementById("plus").prepend(node);
+        document.getElementById('plus').prepend(node);
     }
 });
-// <script type="text/javascript">
+// <script type='text/javascript'>
 //     function showHomePage(homepage){
 //     document.getElementById(homepage).style.display = 'block';
 //     }
 //   </script>
 
-$("#buttons").click(function() {
+$('#buttons').click(function() {
   document.getElementById('homepage').style.display = 'block';
   document.getElementById('loginpage').style.display = 'none';
 });
 
-// $(document).ready(function(){
-//     $("button").click(function(){
-//       document.getElementById('homepage').style.display = 'block';
-//     	document.getElementById('homepage').style.visibility = 'visible';
-//     });
-// });
-
-// $('#search').click(function () {
-//     $.ajax({
-//         type: "GET",
-//         url: "https://api.spotify.com/v1/search?q=Muse%20blackout&type=track%2Cartist",
-//         dataType: "xml",
-//         beforeSend: function (xhr) {
-//             xhr.setRequestHeader('Authorization', 'Bearer' + 'BQAs1GwetZFUhWmAPZUS_RRZlPsJKFLiT2T_6ZvekdDydtxSlmmSOKXDGnNsvZVX81PEDRlpXGXTeZfAAq-bJqeu0shwh_ULGEVzMWH9pFgt6vTxD3S_p340705rRSI5OZ7FOMMopvSNILoEPJ-moJfyxIXSlCo');
-//         },
-//         success: function (xml) {
-//             console.log(xml);
-//             console.log('yes');
-//         }
-//     });
-// });
-
-// $('#search').click(function () {
-//   let clientID = '0442afbef13c432d8d617507b9ba89ab';
-//   let clientSecret = '2b100f45ee0e43b1ab61a6607238618e';
-//     $.ajax({
-//         type: "POST",
-//         url: "https://accounts.spotify.com/api/token",
-//         beforeSend: function (xhr) {
-//             xhr.setRequestHeader('Access-Control-Allow-Origin', 'http://localhost:8000');
-//             xhr.setRequestHeader('Access-Control-Allow-Credentials', 'true');
-//             xhr.setRequestHeader("Authorization", "Basic " + btoa(clientID + ':' + clientSecret));
-//         },
-//         //dataType: "json",
-//         data: {"grant_type": "client_credentials"},
-//         // success: function (xhr) {
-//         //     console.log(xhr.status);
-//         //     console.log(xhr.statusText);
-//         //     console.log(xhr.response);
-//         // }
-//
-//     });
-// });
-
-$('#search').click(function() {
-  let clientID = '0442afbef13c432d8d617507b9ba89ab';
-  let clientSecret = '2b100f45ee0e43b1ab61a6607238618e';
-  let xhr = new XMLHttpRequest();
-  xhr.open("POST", "https://accounts.spotify.com/api/token");
-  xhr.setRequestHeader('Authorization', 'Basic' + btoa(clientID + ':' +clientSecret));
-  xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-  xhr.send();
-  console.log(xhr.status);
-  console.log(xhr.statusText);
-  console.log(xhr.response);
-//  $('#searchresults').append(xhr.response);
+$('#search').click(function () {
+  let searchQuery = document.getElementById('searchTerm').value;
+  console.log(searchQuery);
+  let access_token = 'BQDwmevy00RX5_mtzbbqIAP7S3CrKc9JknXuoEbmobZzv0Vo7BMQZmGys4UhH-AAND0Yjo3p40vbv7FWv1ydLzE0AzBqmgMsp4OzQAKdu8O97IM-YVgFdirJ3gMr0E3t-91aVraQpuSnexIwYgKrxijTzvKovHxArp-jz_SIgtT3';
+    $.ajax({
+        type: 'GET',
+        url: 'https://api.spotify.com/v1/search?q=' + searchQuery + '&type=track&market=us&limit=10&offset=5',
+        headers: {
+            'Authorization': 'Bearer ' + access_token
+        },
+        success: function (response) {
+          processResults(response);
+          //$('#searchresults').append(data.tracks.items[0].album.images[0].url);
+          console.log(response);
+        }
+    });
 });
 
-// $('#search').click(function() {
-//   let xhr = new XMLHttpRequest();
-//   xhr.open("GET", "https://api.spotify.com/v1/search?q=Muse%20blackout&type=track", false);
-//   xhr.setRequestHeader('Authorization', 'Bearer' + 'BQAVTivzRI871w6BhJSy0yHDLjHLVNmPPnbFIoj4QlDecYv1pJlsciZaR9dKUgE5R7iGzBGcDdxOcecM2SjOdVrGqy9xLf2Zv1qv-MTFYFt2-ARunyl77DOYaNXwRIQgxOH-l5FM5XIAOtm2L2FbllHw_em_gODBhsRnA3aUdg');
-//   xhr.send();
-//   console.log(xhr.status);
-//   console.log(xhr.statusText);
-//   console.log(xhr.response);
-// //  $('#searchresults').append(xhr.response);
-// });
+let processResults = function(response) {
+    $('#searchresults').empty();
+    // Object.keys(scorelist).forEach(function(key) {
+    //     scores += '<br>' + key + ': ' + scorelist[key];
+    // });
+    let albumIcon = new Image();
+    albumIcon.src = response.tracks.items[0].album.images[0].url;
+    albumIcon.style.width = '100px';
+    albumIcon.style.height = '100px';
+    $('#searchresults').append(albumIcon);
+    $('#searchresults').append(response.tracks.items[0]);
+};

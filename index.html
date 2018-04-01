@@ -14,7 +14,6 @@
       audiojs.createAll();
     });
   </script>
-
   </head>
 
   <body>
@@ -45,7 +44,8 @@
         <div id='plus'>+</div>
       </div>
         <div id='main'>
-          <div id = 'search'><input type='text' class='searchTerm' placeholder='Search..'></div>
+          <div id = 'search'><input type='text' id='searchTerm' class='searchTerm' placeholder='Search..'></div>
+            <button id="searchButton">Click here</button>
           <div> <p id='searchresults'> </p></div>
           <div class='player'>
             <audio preload='auto'>
@@ -56,14 +56,13 @@
     </div>
   </body>
 
-
   <script src='https://code.jquery.com/jquery-1.11.3.min.js'></script>
   <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
   <script src='index.js'></script>
-  <script src="https://sdk.scdn.co/spotify-player.js"></script>
+  <script src="https://sdk.scdn.co/spotify-player.js"></script> --> -->
   <script>
     window.onSpotifyWebPlaybackSDKReady = () => {
-      const token = 'BQAkN-r1oUzUU2zlW_Rz_8_9_GTeGAmzSU0OcfDjIw_kT8hWiTj-xLnVQbkGoFwlV-62KKiUr8G0RCk8sBC8tx1Cmu1ouDvC-TyvCCDk12Zu_z02SmbHfx3ggShaUDCC_owVULrdCKRmMnUMw4CQn0E-XupYlV1xF1Kx12HuKNiw';
+      const token = 'BQDwmevy00RX5_mtzbbqIAP7S3CrKc9JknXuoEbmobZzv0Vo7BMQZmGys4UhH-AAND0Yjo3p40vbv7FWv1ydLzE0AzBqmgMsp4OzQAKdu8O97IM-YVgFdirJ3gMr0E3t-91aVraQpuSnexIwYgKrxijTzvKovHxArp-jz_SIgtT3';
       const player = new Spotify.Player({
         name: 'Web Playback SDK Quick Start Player',
         getOAuthToken: cb => { cb(token); }
@@ -85,6 +84,33 @@
 
       // Connect to the player!
       player.connect();
+
+    //   const access_token = 'BQAsX9Mx4QOCziUEVQ0rFHLcD8CzU6G5vgNxGPyOMKg8PqmCxZ1vZnH7Ddt8ioNNH0v_BWFAvViYKmCE4_PrnUIft8fJx57H6t9fy41cvR_WLN8SJ7QEAkhj6T8bNIvmY_ESYNeSNHPeOflOHtvRIii3b2fZgrykK_v9KDshXYzB';
+    //
+    //   const play = ({
+    //     spotify_uri,
+    //     playerInstance: {
+    //       _options: {
+    //         getOAuthToken
+    //       }
+    //     }
+    //   }) => {
+    //     getOAuthToken(access_token => {
+    //       fetch(`https://api.spotify.com/v1/me/player/play`, {
+    //         method: 'PUT',
+    //         body: JSON.stringify({ uris: [spotify_uri] }),
+    //         headers: {
+    //           'Content-Type': 'application/json',
+    //           'Authorization': `Bearer ${access_token}`
+    //         },
+    //       });
+    //     });
+    //   };
+    //
+    //   play({
+    //     playerInstance: new Spotify.Player({ name: "...", getOAuthToken: cb => { cb(access_token); }}),
+    //     spotify_uri: 'spotify:track:1301WleyT98MSxVHPZCA6M',
+    //   });
     };
   </script>
 </html>
