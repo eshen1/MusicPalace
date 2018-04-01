@@ -3,7 +3,7 @@ let driver = neo4j.driver("bolt://localhost:7687", neo4j.auth.basic("neo4j", "12
 let session = driver.session();
 
 session
-  .run('MERGE (jay:Person {name : {nameParam} }) RETURN jay.name AS name', {nameParam: 'jay'})
+  .run('CREATE (database:User {email: {emailParam}, password: {passwordParam}) RETURN database', {email: "test@gmail.com", password: "password"})
   .subscribe({
     onNext: function (record) {
       console.log(record.get('name'));
