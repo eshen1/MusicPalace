@@ -1,5 +1,4 @@
-const ACCESS_TOKEN = 'BQB7FID3SxQ7HxwvBTwyCe8gBYjU85PgyNSLi9W9LHkideBV7vsfVAKn5cB8ofPFl3uUEPfihuH9m9w3tPGzVX1yVQrgAuxNRUxKqL__65-VckuNG9doBqQt7DNqzQtNCJe_WvNVd9paWqTkgOjf4qFtmxpplNTugclxs6dPrmPL';
-
+const ACCESS_TOKEN = 'BQAC8M0GWAR37VDtfO4DaRSHP4NkaN-Zwnd_kGsNVy8o81kJZxSgCufg30iu0YUZKyZ00FLCFZpbOP4JI2D4Y6z4eTkkSTa63XQHKwSUa925tirzV268dh5qd4oqfxIJqb8BUJ_1TGSsF3NgO-Gu5f2GSDzxMbsu141h4biUN271';
 
 $( '.sidenav a +' ).click(function() {
   let person = prompt('Please enter your music palace Name', 'Music');
@@ -65,7 +64,6 @@ $('#buttons').click(function() {
 // });
 
 // $('#search').click(function() {
-//   let access_token = 'BQALR57LX1rC2eaq7aE8dCD28HfMKepITm0_i6HWK9Vn118NOk7RXhh6dv3gWnDxZI8H_KrKbRWss_CHJXVZq57SwB8_2LxWPD0TOzgv9QX-k-aH82Mjl7V9g5hZri7tpP0E80CVZQLgd7ZnurthdIFbYIJx_FAw5CKTMDugoA';
 //   let xhr = new XMLHttpRequest();
 //   xhr.open('GET', 'https://api.spotify.com/v1/search?q=live&type=track&market=us&limit=10&offset=5', false);
 //   xhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
@@ -80,7 +78,6 @@ let trackUri = '';
 $('#searchButton').click(function () {
   let searchQuery = document.getElementById('searchTerm').value;
   console.log(searchQuery);
-  // let access_token = 'BQCg3z_RqMGAmGE5zO7H0fHpFpJOjntGQH7ysRb9uU4gpFvjrSgluwrfTQ6WyIPv5mSWcOnLpATQIs54PimE-jvyfKtjeJ7U7Dq5H6xLoYZK1MQqCNupFGScTO47ARIJoPJkmfji2RyjXN5SxNXxqQjlGuDPsGTcDI73yZ--M1BQ';
     $.ajax({
         type: 'GET',
         url: 'https://api.spotify.com/v1/search?q=' + searchQuery + '&type=track&market=us&limit=10&offset=5',
@@ -107,28 +104,37 @@ $('#searchresults').click(function(){
   //     }
   // });
 
-$.ajax({
-    type: 'PUT',
-    url: 'https://api.spotify.com/v1/me/player/play?device_id=12967c87accca1114dff634933e2bea20d79475c',
-    headers: {
-        'Authorization': 'Bearer ' + ACCESS_TOKEN,
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    },
-    body: {
-      // "context_uri": "spotify:album:4LH4d3cOWNNsVw41Gqt2kv"
-      'uris': [ 'trackUri' ]
-    },
-    success: function (data) {
-    console.log(data);
-    }
+  // $.ajax({
+  //     type: 'PUT',
+  //     url: 'https://api.spotify.com/v1/me/player/play?device_id=12967c87accca1114dff634933e2bea20d79475c',
+  //     headers: {
+  //         'Authorization': 'Bearer ' + ACCESS_TOKEN,
+  //         'Accept': 'application/json',
+  //         'Content-Type': 'application/json'
+  //     },
+  //     body: {
+  //       // "context_uri": "spotify:track:5bknBRjKJZ643DAN2w8Yoy"
+  //       'uris': [trackUri]
+  //     },
+  //     success: function (data) {
+  //       console.log(data);
+  //     }
+  // });
+
+fetch('https://api.spotify.com/v1/me/player/play?device_id=12967c87accca1114dff634933e2bea20d79475c', {
+  method: 'PUT',
+  body: JSON.stringify({ uris: [trackUri] }),
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' + ACCESS_TOKEN
+  },
+});
+
+  console.log(trackUri);
 });
 
 
-console.log(trackUri);
 
-
-});
 
 let processResults = function(response) {
     $('#searchresults').empty();
