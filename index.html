@@ -46,11 +46,11 @@
         <div id='main'>
           <div id = 'search'><input type='text' id='searchTerm' class='searchTerm' placeholder='Search..'><button id="searchButton">Search Music</button></div>
           <div id='searchresults'> </div>
-          <!-- <div class='player'>
+          <div class='player'>
             <audio preload='auto'>
               <source src='http://listen.vo.llnwd.net/g3/1/7/4/7/6/1174767471.mp3'>
           </audio>
-          </div> -->
+          </div>
         </div>
     </div>
   </body>
@@ -61,7 +61,7 @@
   <script src="https://sdk.scdn.co/spotify-player.js"></script> --> -->
   <script>
     window.onSpotifyWebPlaybackSDKReady = () => {
-      const token = 'BQAC8M0GWAR37VDtfO4DaRSHP4NkaN-Zwnd_kGsNVy8o81kJZxSgCufg30iu0YUZKyZ00FLCFZpbOP4JI2D4Y6z4eTkkSTa63XQHKwSUa925tirzV268dh5qd4oqfxIJqb8BUJ_1TGSsF3NgO-Gu5f2GSDzxMbsu141h4biUN271';
+      const token = 'BQBmrrIBPwKGD6ph5csPpH_7WZiPsOeMzXz2CyO0MMq3YYmiWEjMiX_HwGyK_T0uOz2PpnHlg5ol9r822ZljxNu13OSpSFI68bFQ0YUdfw4yBGIyJH2le8jGSYA9sNGkh2GLTI0aS-5sSTBF-rM_KN7lkS8Y48UWxNlY8dI5UjO1';
       const player = new Spotify.Player({
         name: 'Web Playback SDK Quick Start Player',
         getOAuthToken: cb => { cb(token); }
@@ -83,6 +83,15 @@
 
       // Connect to the player!
       player.connect();
+
+      $('#homepage').click(function(){
+        player.getCurrentState().then(state => {
+          if (state) {
+            player.pause();
+            return;
+          }
+        });
+      });
 
     //   const access_token = 'BQAsX9Mx4QOCziUEVQ0rFHLcD8CzU6G5vgNxGPyOMKg8PqmCxZ1vZnH7Ddt8ioNNH0v_BWFAvViYKmCE4_PrnUIft8fJx57H6t9fy41cvR_WLN8SJ7QEAkhj6T8bNIvmY_ESYNeSNHPeOflOHtvRIii3b2fZgrykK_v9KDshXYzB';
     //
