@@ -1,4 +1,4 @@
-const ACCESS_TOKEN = 'BQAnx0ye2HXzqFhgI9pRojCzoWAfqGCAKq-0z0COC0ojillMzsoh7E2WC_WF5kyH7DHAp5rl1GD_E3kmH7Cqw2pcEo7vIS9RXJSdqhVrD5JnErL-jfFENOBizuk10s75iz2aJqqBj49P_bPw8qmkUTZ3Zio7jurl1qLpO9CHwSpT';
+const ACCESS_TOKEN = 'BQB7FID3SxQ7HxwvBTwyCe8gBYjU85PgyNSLi9W9LHkideBV7vsfVAKn5cB8ofPFl3uUEPfihuH9m9w3tPGzVX1yVQrgAuxNRUxKqL__65-VckuNG9doBqQt7DNqzQtNCJe_WvNVd9paWqTkgOjf4qFtmxpplNTugclxs6dPrmPL';
 
 
 $( '.sidenav a +' ).click(function() {
@@ -88,9 +88,8 @@ $('#searchButton').click(function () {
             'Authorization': 'Bearer ' + ACCESS_TOKEN
         },
         success: function (response) {
-          processResults(response);
           trackUri = response.tracks.items[0].uri;
-          //$('#searchresults').append(data.tracks.items[0].album.images[0].url);
+          processResults(response);
           console.log(response);
         }
     });
@@ -98,7 +97,15 @@ $('#searchButton').click(function () {
 
 $('#searchresults').click(function(){
 
-
+  // $.ajax({
+  //     type: 'PUT',
+  //     url: 'https://api.spotify.com/v1/me/player/pause?device_id=12967c87accca1114dff634933e2bea20d79475c',
+  //     headers: {
+  //         'Authorization': 'Bearer ' + ACCESS_TOKEN,
+  //         'Accept': 'application/json',
+  //         'Content-Type': 'application/json'
+  //     }
+  // });
 
 $.ajax({
     type: 'PUT',
@@ -111,32 +118,32 @@ $.ajax({
     body: {
       // "context_uri": "spotify:album:4LH4d3cOWNNsVw41Gqt2kv"
       'uris': [ 'trackUri' ]
+    },
+    success: function (data) {
+    console.log(data);
     }
-    // success: function (response) {
-    //   return reponse;
-    // //  processResults(response);
-    //   //$('#searchresults').append(data.tracks.items[0].album.images[0].url);
-    // //  console.log(response);
-    // }
 });
 
 
-
 console.log(trackUri);
-
 
 
 });
 
 let processResults = function(response) {
     $('#searchresults').empty();
-    // Object.keys(scorelist).forEach(function(key) {
-    //     scores += '<br>' + key + ': ' + scorelist[key];
-    // });
-    let albumIcon = new Image();
-    albumIcon.src = response.tracks.items[0].album.images[0].url;
-    albumIcon.style.width = '100px';
-    albumIcon.style.height = '100px';
-    $('#searchresults').append(albumIcon);
-    $('#searchresults').append(response);
+    for (let i = 0; i < 10; i++) {
+      let albumIcon = new Image();
+
+      albumIcon.src = response.tracks.items[i].album.images[0].url;
+      albumIcon.style.width = '100px';
+      albumIcon.style.height = '100px';
+      albumIcon.style.marginBottom = '10px';
+
+      let result = document.createTextNode('Title: ' + response.tracks.items[i].name + ', Artist: ' + response.tracks.items[i].artists[0].name + ', Album: ' + response.tracks.items[i].album.name + '\n');
+      $('#searchresults').append(albumIcon);
+      $('#searchresults').append(result);
+      $('#searchresults').append('<br>');
+    }
+
 };
