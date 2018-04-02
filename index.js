@@ -1,4 +1,4 @@
-const ACCESS_TOKEN = 'BQCg3z_RqMGAmGE5zO7H0fHpFpJOjntGQH7ysRb9uU4gpFvjrSgluwrfTQ6WyIPv5mSWcOnLpATQIs54PimE-jvyfKtjeJ7U7Dq5H6xLoYZK1MQqCNupFGScTO47ARIJoPJkmfji2RyjXN5SxNXxqQjlGuDPsGTcDI73yZ--M1BQ';
+const ACCESS_TOKEN = 'BQAnx0ye2HXzqFhgI9pRojCzoWAfqGCAKq-0z0COC0ojillMzsoh7E2WC_WF5kyH7DHAp5rl1GD_E3kmH7Cqw2pcEo7vIS9RXJSdqhVrD5JnErL-jfFENOBizuk10s75iz2aJqqBj49P_bPw8qmkUTZ3Zio7jurl1qLpO9CHwSpT';
 
 
 $( '.sidenav a +' ).click(function() {
@@ -76,7 +76,7 @@ $('#buttons').click(function() {
 //   $('#searchresults').append(xhr.response);
 //   console.log(xhr.response);
 // });
-
+let trackUri = '';
 $('#searchButton').click(function () {
   let searchQuery = document.getElementById('searchTerm').value;
   console.log(searchQuery);
@@ -89,6 +89,7 @@ $('#searchButton').click(function () {
         },
         success: function (response) {
           processResults(response);
+          trackUri = response.tracks.items[0].uri;
           //$('#searchresults').append(data.tracks.items[0].album.images[0].url);
           console.log(response);
         }
@@ -99,24 +100,17 @@ $('#searchresults').click(function(){
 
 
 
-// curl -X "PUT" "https://api.spotify.com/v1/me/player/play?device_id=12967c87accca1114dff634933e2bea20d79475c"
-// --data "{\"context_uri\":\"spotify:album:4I4xtHaIFOzhZfp1NIHkY6\",\"offset\":{\"position\":5}}"
-// -H "Accept: application/json"
-// -H "Content-Type: application/json"
-// -H "Authorization: Bearer BQC"
-
-
-
 $.ajax({
     type: 'PUT',
     url: 'https://api.spotify.com/v1/me/player/play?device_id=12967c87accca1114dff634933e2bea20d79475c',
-    body: {
-      "context_uri": "spotify:album:4LH4d3cOWNNsVw41Gqt2kv"
-    },
     headers: {
         'Authorization': 'Bearer ' + ACCESS_TOKEN,
         'Accept': 'application/json',
         'Content-Type': 'application/json'
+    },
+    body: {
+      // "context_uri": "spotify:album:4LH4d3cOWNNsVw41Gqt2kv"
+      'uris': [ 'trackUri' ]
     }
     // success: function (response) {
     //   return reponse;
@@ -128,7 +122,7 @@ $.ajax({
 
 
 
-console.log('ok');
+console.log(trackUri);
 
 
 
