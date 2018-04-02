@@ -1,0 +1,16 @@
+{
+  "name": "MusicPalace",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "require": "2.4.20",
+    "request": "2.85.0"
+  },
+  "scripts": {
+    "start": "start"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.0.2",
+    "eslint": "^4.10.0"
+  }
+}
