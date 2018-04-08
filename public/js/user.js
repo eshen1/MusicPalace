@@ -19,9 +19,10 @@ let insertUser = function(querys) {
     });
 };
 
-$("#button2").click(function() {
-  let item = document.getElementById('userInfo').value;
-  let query = 'MERGE (name:Person {name : {nameParam} }) RETURN name.name AS name';
-  insertUser(query);
-  console.log("Here");
-});
+// $("#button2").click(function() {
+//   let item = document.getElementById('user').value;
+//   let item2 = document.getElementById('pass').value;
+//   let query = 'MERGE (name:Person {name : {nameParam} }) RETURN name.name AS name';
+//   insertUser(query);
+//   console.log("Here");
+// });
