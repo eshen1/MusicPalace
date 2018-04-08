@@ -13,6 +13,11 @@ $('#plus').click(function() {
     }
 });
 
+$('#playlistNames').click(function() {
+  $('.searchresults').empty();
+  // TODO load songs for this playlist.
+});
+
 // <script type='text/javascript'>
 //     function showHomePage(homepage){
 //     document.getElementById(homepage).style.display = 'block';
@@ -23,7 +28,6 @@ $('#buttons').click(function() {
   document.getElementById('homepage').style.display = 'block';
   document.getElementById('loginpage').style.display = 'none';
 });
-
 
 let trackUri = '';
 $('#searchButton').click(function () {
@@ -50,13 +54,14 @@ let processResults = function(response) {
           id: response.tracks.items[i].uri,
           src: response.tracks.items[i].album.images[0].url,
           width: '100px',
-          height: '100px'
+          height: '100px',
+          css: {
+            'margin-bottom': '10px'
+          }
         });
 
-      $(albumIcon).css('margin-bottom', '10px');
-
       albumIcon.click(function(){
-        trackUri = this.id
+        trackUri = this.id;
         fetch('https://api.spotify.com/v1/me/player/play?device_id=12967c87accca1114dff634933e2bea20d79475c', {
           method: 'PUT',
           body: JSON.stringify({ uris: [trackUri] }),
