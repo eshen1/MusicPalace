@@ -42,6 +42,7 @@
     <div id='homepage'>
       <div class='sidenav'>
         <a href='#Home'>Home</a>
+        <div id=playlists></div>
         <div id='plus'>+</div>
       </div>
         <div id='main'>
@@ -62,7 +63,7 @@
   <script src="https://sdk.scdn.co/spotify-player.js"></script> --> -->
   <script>
     window.onSpotifyWebPlaybackSDKReady = () => {
-      const token = 'BQBnfDnhoM_cCcKsBOyPUbCtIwEK5B1e2KIunXPzcr_LZYXGsbubKBUDZuqk-vPMe2tK5XtJ8N34uiYp1ZIOmyQsnaBJVpIo2vdPh2HKpGqD3C1EamSevA1UpLsCirxeKrRc0YVCGxMYj0HqeWLOrECTKSGHjNrREM7OJl5_H6Uo';
+      const token = 'BQBJ0eIfSbFj-o60zNf_E2ltmG62qLDqsOSn5Vj-Ihj1BeImldPIUAdWaWSPiAHHOlp76hRHKIHLKUxpNboBUaNrGWwXocX5g8uW6R5yaiCA7blr8quZeJG8wrM0m6xboLQQJghy1fgw-nqx2OC1DdkJW5w74wva1N1ia78BWj0I';
       const player = new Spotify.Player({
         name: 'Web Playback SDK Quick Start Player',
         getOAuthToken: cb => { cb(token); }
