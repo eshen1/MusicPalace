@@ -5,6 +5,7 @@ let neo4j = require('neo4j-driver').v1;
 let driver = neo4j.driver("bolt://localhost:7687", neo4j.auth.basic("neo4j", "12qwer"));
 let session = driver.session();
 
+const query = 'MERGE (user:User { email:{emailParam} , password: {passwordParam} } )'
 // Create application/x-www-form-urlencoded parser
 let urlencodedParser = bodyParser.urlencoded({ extended: false })
 
@@ -19,7 +20,7 @@ app.post('/process_post', urlencodedParser, function (req, res) {
       last_name:req.body.last_name
    };
    session
-        .run( 'MERGE (names:Person {names : {nameParam} }) RETURN names.name AS name', {nameParam: 'names'})
+        .run( query, {emailParam:response.first_name, passwordParam:response.last_name})
         .subscribe({
           onNext: function (record) {
             console.log(record.get('name'));
