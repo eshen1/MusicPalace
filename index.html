@@ -41,8 +41,9 @@
 
     <div id='homepage'>
       <div class='sidenav'>
-        <a href='#Home'>Home</a>
-        <div id=playlists></div>
+        <div id=playlistNames>
+          <a href='#Home'>Home</a>
+        </div>
         <div id='plus'>+</div>
       </div>
         <div id='main'>
@@ -60,10 +61,10 @@
   <script src='https://code.jquery.com/jquery-1.11.3.min.js'></script>
   <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
   <script src='index.js'></script>
-  <script src="https://sdk.scdn.co/spotify-player.js"></script> --> -->
+  <script src="https://sdk.scdn.co/spotify-player.js"></script>
   <script>
     window.onSpotifyWebPlaybackSDKReady = () => {
-      const token = 'BQBJ0eIfSbFj-o60zNf_E2ltmG62qLDqsOSn5Vj-Ihj1BeImldPIUAdWaWSPiAHHOlp76hRHKIHLKUxpNboBUaNrGWwXocX5g8uW6R5yaiCA7blr8quZeJG8wrM0m6xboLQQJghy1fgw-nqx2OC1DdkJW5w74wva1N1ia78BWj0I';
+      const token = 'BQBnzE-b6FSGC1UcDAzpiwGMM1ynuQqJ_OKJTQ25P0AaJqtf-mZiPcU2kFicKHRr4wbSVn1VglnseTHhxu6Mrx4CcH9NynZoNSmRrGhu73bTJ7WfaFqlCnTV-TTCP4WMENJLIp9fKdvy3OvsScwwNEivKLas5bImQLfnF6IJ0OJI';
       const player = new Spotify.Player({
         name: 'Web Playback SDK Quick Start Player',
         getOAuthToken: cb => { cb(token); }

@@ -1,14 +1,21 @@
-const ACCESS_TOKEN = 'BQBJ0eIfSbFj-o60zNf_E2ltmG62qLDqsOSn5Vj-Ihj1BeImldPIUAdWaWSPiAHHOlp76hRHKIHLKUxpNboBUaNrGWwXocX5g8uW6R5yaiCA7blr8quZeJG8wrM0m6xboLQQJghy1fgw-nqx2OC1DdkJW5w74wva1N1ia78BWj0I';
+const ACCESS_TOKEN = 'BQBnzE-b6FSGC1UcDAzpiwGMM1ynuQqJ_OKJTQ25P0AaJqtf-mZiPcU2kFicKHRr4wbSVn1VglnseTHhxu6Mrx4CcH9NynZoNSmRrGhu73bTJ7WfaFqlCnTV-TTCP4WMENJLIp9fKdvy3OvsScwwNEivKLas5bImQLfnF6IJ0OJI';
 
-$( '#plus' ).click(function() {
-  let person = prompt('Please enter your music palace Name', 'Music');
-    if (person != null) {
-        let node = document.createElement('div');
-        let textnode = document.createTextNode(person);
-        node.appendChild(textnode);
-        document.getElementById('playlists').prepend(node);
+$('#plus').click(function() {
+  let newName = prompt('Please enter your music palace Name', 'Music');
+    if (newName != null) {
+         console.log(newName);
+        let newPlaylist = $("<a>", {
+          id: newName,
+          href: '#'+newName,
+          text: newName
+        });
+        $('#playlistNames').append(newPlaylist);
     }
 });
+
+// TODO when playlist is named, create new Page
+// TODO when playlist name is clicked on, go to that page
+
 // <script type='text/javascript'>
 //     function showHomePage(homepage){
 //     document.getElementById(homepage).style.display = 'block';
