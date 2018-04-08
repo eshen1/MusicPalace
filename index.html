@@ -8,6 +8,7 @@
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css'>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src='audiojs/audiojs/audio.min.js'></script>
   <script>
     audiojs.events.ready(function() {
@@ -45,7 +46,7 @@
       </div>
         <div id='main'>
           <div id = 'search'><input type='text' id='searchTerm' class='searchTerm' placeholder='Search..'><button id="searchButton">Search Music</button></div>
-          <div id='searchresults'> </div>
+          <div class='searchresults'> </div>
           <div class='player'>
             <audio preload='auto'>
               <source src='http://listen.vo.llnwd.net/g3/1/7/4/7/6/1174767471.mp3'>
@@ -61,7 +62,7 @@
   <script src="https://sdk.scdn.co/spotify-player.js"></script> --> -->
   <script>
     window.onSpotifyWebPlaybackSDKReady = () => {
-      const token = 'BQBmrrIBPwKGD6ph5csPpH_7WZiPsOeMzXz2CyO0MMq3YYmiWEjMiX_HwGyK_T0uOz2PpnHlg5ol9r822ZljxNu13OSpSFI68bFQ0YUdfw4yBGIyJH2le8jGSYA9sNGkh2GLTI0aS-5sSTBF-rM_KN7lkS8Y48UWxNlY8dI5UjO1';
+      const token = 'BQBnfDnhoM_cCcKsBOyPUbCtIwEK5B1e2KIunXPzcr_LZYXGsbubKBUDZuqk-vPMe2tK5XtJ8N34uiYp1ZIOmyQsnaBJVpIo2vdPh2HKpGqD3C1EamSevA1UpLsCirxeKrRc0YVCGxMYj0HqeWLOrECTKSGHjNrREM7OJl5_H6Uo';
       const player = new Spotify.Player({
         name: 'Web Playback SDK Quick Start Player',
         getOAuthToken: cb => { cb(token); }
@@ -119,6 +120,7 @@
     //     playerInstance: new Spotify.Player({ name: "...", getOAuthToken: cb => { cb(access_token); }}),
     //     spotify_uri: 'spotify:track:1301WleyT98MSxVHPZCA6M',
     //   });
+
     };
   </script>
 </html>
