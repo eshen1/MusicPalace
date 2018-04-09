@@ -1,4 +1,4 @@
-const ACCESS_TOKEN = 'BQBnzE-b6FSGC1UcDAzpiwGMM1ynuQqJ_OKJTQ25P0AaJqtf-mZiPcU2kFicKHRr4wbSVn1VglnseTHhxu6Mrx4CcH9NynZoNSmRrGhu73bTJ7WfaFqlCnTV-TTCP4WMENJLIp9fKdvy3OvsScwwNEivKLas5bImQLfnF6IJ0OJI';
+const ACCESS_TOKEN = 'BQCaqtGAZgnl0noxguvCfDuSa8-vdZK5eNWNlzOmfJk0V1aWKodphG5l7dPEJXeYH0jJomgBlaoGrqG4VOmJspk6jGaW8pf8b7-uvTiKz80_rDoLTRCvOSOvDhQJX2ZdR5OeVBt0H0RhvJ5TOUS9c-TVg7cHkkMSJ6MBx7BCBeKy';
 
 $('#plus').click(function() {
   let newName = prompt('Please enter your music palace Name', 'Music');
@@ -15,8 +15,12 @@ $('#plus').click(function() {
 
 $('#playlistNames').click(function() {
   $('.searchresults').empty();
-  // TODO load songs for this playlist.
+  // TODO populate with songs for this playlist.
 });
+
+// TODO as each playlist is made, append empty jquery object, hidden
+// TODO when song dropped on playlist, it is added to that jquery object
+
 
 // <script type='text/javascript'>
 //     function showHomePage(homepage){
@@ -31,6 +35,7 @@ $('#buttons').click(function() {
 
 let trackUri = '';
 $('#searchButton').click(function () {
+  window.location.href='#Search';
   let searchQuery = document.getElementById('searchTerm').value;
     $.ajax({
         type: 'GET',
@@ -53,6 +58,7 @@ let processResults = function(response) {
         { 'class': 'songIcon',
           id: response.tracks.items[i].uri,
           src: response.tracks.items[i].album.images[0].url,
+          draggable: 'true',
           width: '100px',
           height: '100px',
           css: {
