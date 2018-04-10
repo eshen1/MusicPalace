@@ -21,7 +21,6 @@ $('#playlistNames').click(function() {
 // TODO as each playlist is made, append empty jquery object, hidden
 // TODO when song dropped on playlist, it is added to that jquery object
 
-
 // <script type='text/javascript'>
 //     function showHomePage(homepage){
 //     document.getElementById(homepage).style.display = 'block';
