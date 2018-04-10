@@ -6,19 +6,23 @@ let driver = neo4j.driver("bolt://localhost:7687", neo4j.auth.basic("neo4j", "12
 let session = driver.session();
 
 const query = 'MERGE (user:User { email:{emailParam} , password: {passwordParam} } )'
+
 // Create application/x-www-form-urlencoded parser
 let urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 app.use(express.static('public'));
+
 app.get('/index.html', function (req, res) {
    res.sendFile( __dirname + "/" + "index.html" );
 })
-app.post('/process_post', urlencodedParser, function (req, res) {
+
+app.post('/login.html', urlencodedParser, function (req, res) {
    // Prepare output in JSON format
    response = {
       first_name:req.body.first_name,
       last_name:req.body.last_name
    };
+   console.log("Please run");
    session
         .run( query, {emailParam:response.first_name, passwordParam:response.last_name})
         .subscribe({
@@ -34,30 +38,8 @@ app.post('/process_post', urlencodedParser, function (req, res) {
         });
 
    console.log(response);
-   res.end(JSON.stringify(response));
-})
 
-// app.post('/process_post', urlencodedParser, function (req, res) {
-//    // Prepare output in JSON format
-//    response = {
-//       first_name:req.body.first_name,
-//       last_name:req.body.last_name
-//    };
-//    console.log(response);
-//   //  session
-//   //    .run(   'MERGE (name:Person {name : {nameParam} }) RETURN name.name AS name', {nameParam: 'name'})
-//   //    .subscribe({
-//   //      onNext: function (record) {
-//   //        console.log(record.get('name'));
-//   //      },
-//   //      onCompleted: function () {
-//   //        session.close();
-//   //      },
-//   //      onError: function (error) {
-//   //        console.log(error);
-//   //      }
-//   //    });
-//    res.end(JSON.stringify(response));
-// })
+   res.sendFile( __dirname + "/public/" + "login.html" );
+})
 
 let server = app.listen(3000)

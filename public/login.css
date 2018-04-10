@@ -1,0 +1,107 @@
+#all {
+  background-color: rgba(181, 197, 202, 0.5);
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+.sidenav {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    box-shadow: 4px 0 5px 0 grey;
+    text-shadow: 2px 2px 2px red;
+    background-color: #312e2e;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    display: block;
+    text-align: center;
+    color: #6accc5;
+}
+
+#plus {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    display: block;
+    text-align: center;
+    color: #e82b1e;
+}
+
+#search {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  display: block;
+  box-shadow: 4px 0 5px 0 grey;
+  text-shadow: 2px 2px 2px red;
+  background-color: #312e2e;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav div:hover {
+    color: #f1f1f1;
+}
+
+input.searchTerm {
+  font-family: 'Roboto Mono', monospace;
+  border: 1px solid transparent;
+  box-shadow: 4px 0 5px 0 grey;
+  margin: auto;
+  text-shadow: 2px 2px 2px #6accc5;
+  color: #e82b1e;
+  background: rgba(181, 197, 202, 0.5);
+}
+
+#main {
+    margin-left: 160px; /* Same as the width of the sidebar */
+    height: 100%;
+    width: 100%;
+}
+
+.player {
+  position: fixed;
+  bottom: 20px;
+  width:100%
+  text-align: center;
+}
+
+#label {
+  text-align: center;
+  padding: 5px;
+  font-family: 'Monoton', cursive;
+  box-shadow: 4px 0 5px 0 grey;
+  text-shadow: 2px 2px 2px red;
+  color: #6accc5;
+  background-color: #312e2e;
+
+}
+
+#user{
+  text-align: center;
+  padding: 5px;
+}
+
+#pass{
+  text-align: center;
+  padding: 5px;
+}
+
+#buttons{
+  text-align: center;
+  padding: 5px;
+}

@@ -32,112 +32,20 @@
       <div id ='label'><h2>Login Page</h2></div>
       <!-- <div id="backg"></div> -->
       <div class='container'>
-        <div id ='user'>
-          <label><b>Username</b></label>
-          <input type='text' placeholder='Enter Username' name='uname'>
-        </div>
         <div id='pass'>
-          <label><b>Password</b></label>
-          <input type='password' placeholder='Enter Password' name='psw'>
+          <form action = "http://localhost:3000/login.html" method = "POST">
+             First Name: <input type = "text" name = "first_name"> <br>
+             Last Name: <input type = "text" name = "last_name">
+             <div><input type = "submit" value = "Login"></div>
+          </form>
         </div>
-        <div id='buttons'>
-          <button type='button'>Login</button>
-        </div>
+
         <div id='buttons'>
           <button type='button'>Register</button>
         </div>
 
-        <form action = "http://localhost:3000/process_post" method = "POST">
-           First Name: <input type = "text" name = "first_name"> <br>
-           Last Name: <input type = "text" name = "last_name">
-           <input type = "submit" value = "Submit">
-        </form>
-
       </div>
     </div>
-
-    <div id='homepage'>
-      <div class='sidenav'>
-        <a href='#Home'>Home</a>
-        <div id='plus'>+</div>
-      </div>
-        <div id='main'>
-          <div id = 'search'><input type='text' id='searchTerm' class='searchTerm' placeholder='Search..'><button id="searchButton">Search Music</button></div>
-          <div id='searchresults'> </div>
-          <div class='player'>
-            <audio preload='auto'>
-              <source src='http://listen.vo.llnwd.net/g3/1/7/4/7/6/1174767471.mp3'>
-          </audio>
-          </div>
-        </div>
-    </div>
-  </body>
-
-  <script src='https://code.jquery.com/jquery-1.11.3.min.js'></script>
-  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
-  <script src='js/index.js'></script>
-  <script src='js/user.js'>
-  <script src="https://sdk.scdn.co/spotify-player.js"></script> --> -->
-  <script>
-    window.onSpotifyWebPlaybackSDKReady = () => {
-      const token = 'BQBmrrIBPwKGD6ph5csPpH_7WZiPsOeMzXz2CyO0MMq3YYmiWEjMiX_HwGyK_T0uOz2PpnHlg5ol9r822ZljxNu13OSpSFI68bFQ0YUdfw4yBGIyJH2le8jGSYA9sNGkh2GLTI0aS-5sSTBF-rM_KN7lkS8Y48UWxNlY8dI5UjO1';
-      const player = new Spotify.Player({
-        name: 'Web Playback SDK Quick Start Player',
-        getOAuthToken: cb => { cb(token); }
-      });
-
-      // Error handling
-      player.addListener('initialization_error', ({ message }) => { console.error(message); });
-      player.addListener('authentication_error', ({ message }) => { console.error(message); });
-      player.addListener('account_error', ({ message }) => { console.error(message); });
-      player.addListener('playback_error', ({ message }) => { console.error(message); });
-
-      // Playback status updates
-      player.addListener('player_state_changed', state => { console.log(state); });
-
-      // Ready
-      player.addListener('ready', ({ device_id }) => {
-        console.log('Ready with Device ID', device_id);
-      });
-
-      // Connect to the player!
-      player.connect();
-
-      $('#homepage').click(function(){
-        player.getCurrentState().then(state => {
-          if (state) {
-            player.pause();
-            return;
-          }
-        });
-      });
-
-    //   const access_token = 'BQAsX9Mx4QOCziUEVQ0rFHLcD8CzU6G5vgNxGPyOMKg8PqmCxZ1vZnH7Ddt8ioNNH0v_BWFAvViYKmCE4_PrnUIft8fJx57H6t9fy41cvR_WLN8SJ7QEAkhj6T8bNIvmY_ESYNeSNHPeOflOHtvRIii3b2fZgrykK_v9KDshXYzB';
-    //
-    //   const play = ({
-    //     spotify_uri,
-    //     playerInstance: {
-    //       _options: {
-    //         getOAuthToken
-    //       }
-    //     }
-    //   }) => {
-    //     getOAuthToken(access_token => {
-    //       fetch(`https://api.spotify.com/v1/me/player/play`, {
-    //         method: 'PUT',
-    //         body: JSON.stringify({ uris: [spotify_uri] }),
-    //         headers: {
-    //           'Content-Type': 'application/json',
-    //           'Authorization': `Bearer ${access_token}`
-    //         },
-    //       });
-    //     });
-    //   };
-    //
-    //   play({
-    //     playerInstance: new Spotify.Player({ name: "...", getOAuthToken: cb => { cb(access_token); }}),
-    //     spotify_uri: 'spotify:track:1301WleyT98MSxVHPZCA6M',
-    //   });
-    };
+</body>
   </script>
 </html>
