@@ -1,25 +1,43 @@
-const ACCESS_TOKEN = 'BQCaqtGAZgnl0noxguvCfDuSa8-vdZK5eNWNlzOmfJk0V1aWKodphG5l7dPEJXeYH0jJomgBlaoGrqG4VOmJspk6jGaW8pf8b7-uvTiKz80_rDoLTRCvOSOvDhQJX2ZdR5OeVBt0H0RhvJ5TOUS9c-TVg7cHkkMSJ6MBx7BCBeKy';
+const ACCESS_TOKEN = 'BQBDsRuqD6EJVN5PztZlTpEzxPfPGm1X7v1ooTSzO8ukNIUZuPG7PoYgCVirQokuhM7vF2itNo420Wg8kodN3c0Ui8unI0fGo_i3N7vJ4jd-gz2qfFnwnk2lOntf9s1F8MsyoiqUEWkTWfef7JWi2S1Dt5TUVHQg0ZyVcsGCaiS0';
+
+let playlistContent = {};
+let trackUri = '';
 
 $('#plus').click(function() {
   let newName = prompt('Please enter your music palace Name', 'Music');
-    if (newName != null) {
-         console.log(newName);
-        let newPlaylist = $("<a>", {
-          id: newName,
-          href: '#'+newName,
-          text: newName
-        });
-        $('#playlistNames').append(newPlaylist);
-    }
-});
+  playlistContent[newName] = [];
+  if (newName != '') {
+    let newPlaylist = $("<a>", {
+      id: newName,
+      href: '#'+newName,
+      text: newName
+    }).droppable({
+      drop: function(event, ui) {
+        playlistContent[newName].push(ui.draggable);
+      }
+    });
 
-$('#playlistNames').click(function() {
-  $('.searchresults').empty();
-  // TODO populate with songs for this playlist.
+    newPlaylist.click(function() {
+      $('.searchresults').empty();
+      for (let i = 0; i < playlistContent[newName].length; i++) {
+        playlistContent[newName][i].click(function(){
+          trackUri = playlistContent[newName][i][0].id;
+          fetch('https://api.spotify.com/v1/me/player/play?device_id=12967c87accca1114dff634933e2bea20d79475c', {
+            method: 'PUT',
+            body: JSON.stringify({ uris: [trackUri] }),
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + ACCESS_TOKEN
+            },
+          });
+          console.log(playlistContent[newName][i][0].id);
+        })
+        $('.searchresults').append(playlistContent[newName][i]);
+      }
+    });
+    $('#playlistNames').append(newPlaylist);
+  }
 });
-
-// TODO as each playlist is made, append empty jquery object, hidden
-// TODO when song dropped on playlist, it is added to that jquery object
 
 // <script type='text/javascript'>
 //     function showHomePage(homepage){
@@ -32,7 +50,6 @@ $('#buttons').click(function() {
   document.getElementById('loginpage').style.display = 'none';
 });
 
-let trackUri = '';
 $('#searchButton').click(function () {
   window.location.href='#Search';
   let searchQuery = document.getElementById('searchTerm').value;
@@ -51,40 +68,39 @@ $('#searchButton').click(function () {
 });
 
 let processResults = function(response) {
-    $('.searchresults').empty();
-    for (let i = 0; i < 10; i++) {
-      let albumIcon = $('<img />',
-        { 'class': 'songIcon',
-          id: response.tracks.items[i].uri,
-          src: response.tracks.items[i].album.images[0].url,
-          draggable: 'true',
-          width: '100px',
-          height: '100px',
-          css: {
-            'margin-bottom': '10px'
-          }
-        });
-
-      albumIcon.click(function(){
-        trackUri = this.id;
-        fetch('https://api.spotify.com/v1/me/player/play?device_id=12967c87accca1114dff634933e2bea20d79475c', {
-          method: 'PUT',
-          body: JSON.stringify({ uris: [trackUri] }),
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + ACCESS_TOKEN
-          },
-        });
-        console.log(this.id);
+  $('.searchresults').empty();
+  for (let i = 0; i < 10; i++) {
+    let albumIcon = $('<img />',
+      { 'class': 'songIcon',
+        id: response.tracks.items[i].uri,
+        src: response.tracks.items[i].album.images[0].url,
+        width: '100px',
+        height: '100px',
+        css: {
+          'margin-bottom': '10px'
+        }
+    }).click(function(){
+      trackUri = this.id;
+      fetch('https://api.spotify.com/v1/me/player/play?device_id=12967c87accca1114dff634933e2bea20d79475c', {
+        method: 'PUT',
+        body: JSON.stringify({ uris: [trackUri] }),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + ACCESS_TOKEN
+        },
       });
+      console.log(this.id);
+    }).draggable({
+      revert: true
+    });
 
-      let title = response.tracks.items[i].name;
-      let artist = response.tracks.items[i].artists[0].name;
-      let album = response.tracks.items[i].album.name;
+    let title = response.tracks.items[i].name;
+    let artist = response.tracks.items[i].artists[0].name;
+    let album = response.tracks.items[i].album.name;
 
-      let result = document.createTextNode('Title: ' + title + ', Artist: ' + artist + ', Album: ' + album + '\n');
-      $('.searchresults').append(albumIcon);
-      $('.searchresults').append(result);
-      $('.searchresults').append('<br>');
-    }
+    let result = document.createTextNode('Title: ' + title + ', Artist: ' + artist + ', Album: ' + album + '\n');
+    $('.searchresults').append(albumIcon);
+    $('.searchresults').append(result);
+    $('.searchresults').append('<br>');
+  }
 };
