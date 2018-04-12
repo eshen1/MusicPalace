@@ -1,20 +1,34 @@
-const ACCESS_TOKEN = 'BQBDsRuqD6EJVN5PztZlTpEzxPfPGm1X7v1ooTSzO8ukNIUZuPG7PoYgCVirQokuhM7vF2itNo420Wg8kodN3c0Ui8unI0fGo_i3N7vJ4jd-gz2qfFnwnk2lOntf9s1F8MsyoiqUEWkTWfef7JWi2S1Dt5TUVHQg0ZyVcsGCaiS0';
+const ACCESS_TOKEN = 'BQBRGGaH9DY51O0QI_4M7EayQnaI98PAsLDIFv27WQRA_zQk3NoC2e1GLznX7_i4xMDst9JQi7EFs8EXLRgfYJkZN_IFbGz4NZGBIuALrhh6kqw2DaJ0aXBnYvvV9FUanZav7P_dERJkuU7e6AyQa_1B0lmMubb015NQ8TACBknq';
 
 let playlistContent = {};
 let trackUri = '';
+
+$('html').on('dragenter dragleave dragover drop', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+});
+
+// document.addEventListener("dragover", function( event ) {
+//     // prevent default to allow drop
+//     event.preventDefault();
+//     event.originalEvent.dataTransfer.dropEffect = "copy";
+// }, false);
 
 $('#plus').click(function() {
   let newName = prompt('Please enter your music palace Name', 'Music');
   playlistContent[newName] = [];
   if (newName != '') {
-    let newPlaylist = $("<a>", {
+    let newPlaylist = $("<div/>", {
       id: newName,
       href: '#'+newName,
       text: newName
-    }).droppable({
-      drop: function(event, ui) {
-        playlistContent[newName].push(ui.draggable);
-      }
+    }).droppable();
+
+    $(newPlaylist).on("drop", function(event, ui) {
+      event.preventDefault();
+      event.stopPropagation();
+      alert('drop');
+      playlistContent[newName].push(ui.draggable);
     });
 
     newPlaylist.click(function() {
@@ -70,6 +84,10 @@ $('#searchButton').click(function () {
 let processResults = function(response) {
   $('.searchresults').empty();
   for (let i = 0; i < 10; i++) {
+    let result = $('<div/>', {
+      id: response.tracks.items[i].uri
+    });
+
     let albumIcon = $('<img />',
       { 'class': 'songIcon',
         id: response.tracks.items[i].uri,
@@ -90,16 +108,17 @@ let processResults = function(response) {
         },
       });
       console.log(this.id);
-    }).draggable({
-      revert: true
     });
 
     let title = response.tracks.items[i].name;
     let artist = response.tracks.items[i].artists[0].name;
     let album = response.tracks.items[i].album.name;
-
-    let result = document.createTextNode('Title: ' + title + ', Artist: ' + artist + ', Album: ' + album + '\n');
-    $('.searchresults').append(albumIcon);
+    let songInfo = document.createTextNode('Title: ' + title + ', Artist: ' + artist + ', Album: ' + album + '\n');
+    result.append(albumIcon);
+    result.append(songInfo);
+    result.draggable({
+      revert: true
+    });
     $('.searchresults').append(result);
     $('.searchresults').append('<br>');
   }
