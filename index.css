@@ -78,6 +78,10 @@ body, html {
   background-color: #312e2e;
 }
 
+.searchresults {
+  width: 600px;
+}
+
 .sidenav a:hover {
     color: #f1f1f1;
 }

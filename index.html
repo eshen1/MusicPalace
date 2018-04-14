@@ -67,15 +67,13 @@
   </body>
 
 
-
-
   <!-- <script src='https://code.jquery.com/jquery-1.11.3.min.js'></script> -->
   <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
   <script src='index.js'></script>
   <script src="https://sdk.scdn.co/spotify-player.js"></script>
   <script>
     window.onSpotifyWebPlaybackSDKReady = () => {
-      const token = 'BQBRGGaH9DY51O0QI_4M7EayQnaI98PAsLDIFv27WQRA_zQk3NoC2e1GLznX7_i4xMDst9JQi7EFs8EXLRgfYJkZN_IFbGz4NZGBIuALrhh6kqw2DaJ0aXBnYvvV9FUanZav7P_dERJkuU7e6AyQa_1B0lmMubb015NQ8TACBknq';
+      const token = 'BQBN66D2GmdICvQwHjWa9Bh-JRZ-Gmjd5PVvA_ZgJ7HGFlxTqO3Z39_X_Y4AAKYnH6ZHkR6vwGs50pCyLm61HqT_GlHRx2a1k5EoUJ1cq90BVf-Lp9BlqbtvUFGC-6J2WVmsvzZscF_kjf6GIaD_hLxCA6hOAHDx6OCXg4hYD42T';
       const player = new Spotify.Player({
         name: 'Web Playback SDK Quick Start Player',
         getOAuthToken: cb => { cb(token); }
@@ -98,7 +96,7 @@
       // Connect to the player!
       player.connect();
 
-      $('#homepage').click(function(){
+      $('.sidenav').click(function(){
         player.getCurrentState().then(state => {
           if (state) {
             player.pause();

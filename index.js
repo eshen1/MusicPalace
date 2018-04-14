@@ -1,4 +1,4 @@
-const ACCESS_TOKEN = 'BQBRGGaH9DY51O0QI_4M7EayQnaI98PAsLDIFv27WQRA_zQk3NoC2e1GLznX7_i4xMDst9JQi7EFs8EXLRgfYJkZN_IFbGz4NZGBIuALrhh6kqw2DaJ0aXBnYvvV9FUanZav7P_dERJkuU7e6AyQa_1B0lmMubb015NQ8TACBknq';
+const ACCESS_TOKEN = 'BQBN66D2GmdICvQwHjWa9Bh-JRZ-Gmjd5PVvA_ZgJ7HGFlxTqO3Z39_X_Y4AAKYnH6ZHkR6vwGs50pCyLm61HqT_GlHRx2a1k5EoUJ1cq90BVf-Lp9BlqbtvUFGC-6J2WVmsvzZscF_kjf6GIaD_hLxCA6hOAHDx6OCXg4hYD42T';
 
 let playlistContent = {};
 let trackUri = '';
@@ -7,12 +7,6 @@ $('html').on('dragenter dragleave dragover drop', function (e) {
     e.preventDefault();
     e.stopPropagation();
 });
-
-// document.addEventListener("dragover", function( event ) {
-//     // prevent default to allow drop
-//     event.preventDefault();
-//     event.originalEvent.dataTransfer.dropEffect = "copy";
-// }, false);
 
 $('#plus').click(function() {
   let newName = prompt('Please enter your music palace Name', 'Music');
@@ -27,8 +21,9 @@ $('#plus').click(function() {
     $(newPlaylist).on("drop", function(event, ui) {
       event.preventDefault();
       event.stopPropagation();
-      alert('drop');
+      alert('added to' + newName);
       playlistContent[newName].push(ui.draggable);
+//     event.originalEvent.dataTransfer.dropEffect = "copy";
     });
 
     newPlaylist.click(function() {
