@@ -5,10 +5,11 @@
   <title> Music Palace </title>
   <link href='https://fonts.googleapis.com/css?family=Dhurjati|Dosis|Josefin+Sans|Roboto+Mono|Ubuntu' rel='stylesheet'>
   <link href='https://fonts.googleapis.com/css?family=Contrail+One|Josefin+Sans|Monoton|Prompt' rel='stylesheet'>
+  <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+  <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css'>
-
-  <script src='js/audiojs/audiojs/audio.min.js'></script>
+  <script src='/js/audiojs/audiojs/audio.min.js'></script>
   <script>
     audiojs.events.ready(function() {
       audiojs.createAll();
@@ -17,61 +18,65 @@
   </head>
 
   <body>
-    <div id='homepage'>
-      <div class='sidenav'>
-        <a href='#Home'>Home</a>
-        <div id='plus'>+</div>
-      </div>
-        <div id='main'>
-          <div id = 'search'><input type='text' id='searchTerm' class='searchTerm' placeholder='Search..'><button id="searchButton">Search Music</button></div>
-          <div id='searchresults'> </div>
-          <div class='player'>
-            <audio preload='auto'>
-              <source src='http://listen.vo.llnwd.net/g3/1/7/4/7/6/1174767471.mp3'>
-          </audio>
-          </div>
-        </div>
-    </div>
-  </body>
+      <div id='homepage'>
+     <div class='sidenav'>
+       <div id=playlistNames>
+         <a href='#Home'>Home</a>
+       </div>
+       <div id='plus'>+</div>
+     </div>
+       <div id='main'>
+         <div id = 'search'><input type='text' id='searchTerm' class='searchTerm' placeholder='Search..'><button id="searchButton">Search Music</button></div>
+         <div class='searchresults'> </div>
+         <div class='player'>
+           <audio preload='auto'>
+             <source src='http://listen.vo.llnwd.net/g3/1/7/4/7/6/1174767471.mp3'>
+         </audio>
+         </div>
+       </div>
+   </div>
 
-  <script src='https://code.jquery.com/jquery-1.11.3.min.js'></script>
-  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
-  <script src='js/index.js'></script>
-  <script src='js/user.js'>
-  <script src="https://sdk.scdn.co/spotify-player.js"></script> --> -->
-  <script>
-    window.onSpotifyWebPlaybackSDKReady = () => {
-      const token = 'BQBmrrIBPwKGD6ph5csPpH_7WZiPsOeMzXz2CyO0MMq3YYmiWEjMiX_HwGyK_T0uOz2PpnHlg5ol9r822ZljxNu13OSpSFI68bFQ0YUdfw4yBGIyJH2le8jGSYA9sNGkh2GLTI0aS-5sSTBF-rM_KN7lkS8Y48UWxNlY8dI5UjO1';
-      const player = new Spotify.Player({
-        name: 'Web Playback SDK Quick Start Player',
-        getOAuthToken: cb => { cb(token); }
-      });
+   <!-- <script type="text/javascript">
+       $(function() {
+           $( ".searchresults" ).draggable();
+       });
+   </script> -->
 
-      // Error handling
-      player.addListener('initialization_error', ({ message }) => { console.error(message); });
-      player.addListener('authentication_error', ({ message }) => { console.error(message); });
-      player.addListener('account_error', ({ message }) => { console.error(message); });
-      player.addListener('playback_error', ({ message }) => { console.error(message); });
+ </body>
 
-      // Playback status updates
-      player.addListener('player_state_changed', state => { console.log(state); });
 
-      // Ready
-      player.addListener('ready', ({ device_id }) => {
-        console.log('Ready with Device ID', device_id);
-      });
-
-      // Connect to the player!
-      player.connect();
-
-      $('#homepage').click(function(){
-        player.getCurrentState().then(state => {
-          if (state) {
-            player.pause();
-            return;
-          }
-        });
-      });
-    };
-  </script>
+ <!-- <script src='https://code.jquery.com/jquery-1.11.3.min.js'></script> -->
+ <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+ <script src='/js/index.js'></script>
+ <script src="https://sdk.scdn.co/spotify-player.js"></script>
+ <script>
+   window.onSpotifyWebPlaybackSDKReady = () => {
+     const token = 'BQBN66D2GmdICvQwHjWa9Bh-JRZ-Gmjd5PVvA_ZgJ7HGFlxTqO3Z39_X_Y4AAKYnH6ZHkR6vwGs50pCyLm61HqT_GlHRx2a1k5EoUJ1cq90BVf-Lp9BlqbtvUFGC-6J2WVmsvzZscF_kjf6GIaD_hLxCA6hOAHDx6OCXg4hYD42T';
+     const player = new Spotify.Player({
+       name: 'Web Playback SDK Quick Start Player',
+       getOAuthToken: cb => { cb(token); }
+     });
+     // Error handling
+     player.addListener('initialization_error', ({ message }) => { console.error(message); });
+     player.addListener('authentication_error', ({ message }) => { console.error(message); });
+     player.addListener('account_error', ({ message }) => { console.error(message); });
+     player.addListener('playback_error', ({ message }) => { console.error(message); });
+     // Playback status updates
+     player.addListener('player_state_changed', state => { console.log(state); });
+     // Ready
+     player.addListener('ready', ({ device_id }) => {
+       console.log('Ready with Device ID', device_id);
+     });
+     // Connect to the player!
+     player.connect();
+     $('.sidenav').click(function(){
+       player.getCurrentState().then(state => {
+         if (state) {
+           player.pause();
+           return;
+         }
+       });
+     });
+   };
+ </script>
 </html>
