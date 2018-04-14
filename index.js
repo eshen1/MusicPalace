@@ -1,21 +1,51 @@
-const ACCESS_TOKEN = 'BQBnzE-b6FSGC1UcDAzpiwGMM1ynuQqJ_OKJTQ25P0AaJqtf-mZiPcU2kFicKHRr4wbSVn1VglnseTHhxu6Mrx4CcH9NynZoNSmRrGhu73bTJ7WfaFqlCnTV-TTCP4WMENJLIp9fKdvy3OvsScwwNEivKLas5bImQLfnF6IJ0OJI';
+const ACCESS_TOKEN = 'BQBN66D2GmdICvQwHjWa9Bh-JRZ-Gmjd5PVvA_ZgJ7HGFlxTqO3Z39_X_Y4AAKYnH6ZHkR6vwGs50pCyLm61HqT_GlHRx2a1k5EoUJ1cq90BVf-Lp9BlqbtvUFGC-6J2WVmsvzZscF_kjf6GIaD_hLxCA6hOAHDx6OCXg4hYD42T';
+
+let playlistContent = {};
+let trackUri = '';
+
+$('html').on('dragenter dragleave dragover drop', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+});
 
 $('#plus').click(function() {
   let newName = prompt('Please enter your music palace Name', 'Music');
-    if (newName != null) {
-         console.log(newName);
-        let newPlaylist = $("<a>", {
-          id: newName,
-          href: '#'+newName,
-          text: newName
-        });
-        $('#playlistNames').append(newPlaylist);
-    }
-});
+  playlistContent[newName] = [];
+  if (newName != '') {
+    let newPlaylist = $("<div/>", {
+      id: newName,
+      href: '#'+newName,
+      text: newName
+    }).droppable();
 
-$('#playlistNames').click(function() {
-  $('.searchresults').empty();
-  // TODO load songs for this playlist.
+    $(newPlaylist).on("drop", function(event, ui) {
+      event.preventDefault();
+      event.stopPropagation();
+      alert('added to' + newName);
+      playlistContent[newName].push(ui.draggable);
+//     event.originalEvent.dataTransfer.dropEffect = "copy";
+    });
+
+    newPlaylist.click(function() {
+      $('.searchresults').empty();
+      for (let i = 0; i < playlistContent[newName].length; i++) {
+        playlistContent[newName][i].click(function(){
+          trackUri = playlistContent[newName][i][0].id;
+          fetch('https://api.spotify.com/v1/me/player/play?device_id=12967c87accca1114dff634933e2bea20d79475c', {
+            method: 'PUT',
+            body: JSON.stringify({ uris: [trackUri] }),
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + ACCESS_TOKEN
+            },
+          });
+          console.log(playlistContent[newName][i][0].id);
+        })
+        $('.searchresults').append(playlistContent[newName][i]);
+      }
+    });
+    $('#playlistNames').append(newPlaylist);
+  }
 });
 
 // <script type='text/javascript'>
@@ -29,8 +59,8 @@ $('#buttons').click(function() {
   document.getElementById('loginpage').style.display = 'none';
 });
 
-let trackUri = '';
 $('#searchButton').click(function () {
+  window.location.href='#Search';
   let searchQuery = document.getElementById('searchTerm').value;
     $.ajax({
         type: 'GET',
@@ -47,39 +77,44 @@ $('#searchButton').click(function () {
 });
 
 let processResults = function(response) {
-    $('.searchresults').empty();
-    for (let i = 0; i < 10; i++) {
-      let albumIcon = $('<img />',
-        { 'class': 'songIcon',
-          id: response.tracks.items[i].uri,
-          src: response.tracks.items[i].album.images[0].url,
-          width: '100px',
-          height: '100px',
-          css: {
-            'margin-bottom': '10px'
-          }
-        });
+  $('.searchresults').empty();
+  for (let i = 0; i < 10; i++) {
+    let result = $('<div/>', {
+      id: response.tracks.items[i].uri
+    });
 
-      albumIcon.click(function(){
-        trackUri = this.id;
-        fetch('https://api.spotify.com/v1/me/player/play?device_id=12967c87accca1114dff634933e2bea20d79475c', {
-          method: 'PUT',
-          body: JSON.stringify({ uris: [trackUri] }),
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + ACCESS_TOKEN
-          },
-        });
-        console.log(this.id);
+    let albumIcon = $('<img />',
+      { 'class': 'songIcon',
+        id: response.tracks.items[i].uri,
+        src: response.tracks.items[i].album.images[0].url,
+        width: '100px',
+        height: '100px',
+        css: {
+          'margin-bottom': '10px'
+        }
+    }).click(function(){
+      trackUri = this.id;
+      fetch('https://api.spotify.com/v1/me/player/play?device_id=12967c87accca1114dff634933e2bea20d79475c', {
+        method: 'PUT',
+        body: JSON.stringify({ uris: [trackUri] }),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + ACCESS_TOKEN
+        },
       });
+      console.log(this.id);
+    });
 
-      let title = response.tracks.items[i].name;
-      let artist = response.tracks.items[i].artists[0].name;
-      let album = response.tracks.items[i].album.name;
-
-      let result = document.createTextNode('Title: ' + title + ', Artist: ' + artist + ', Album: ' + album + '\n');
-      $('.searchresults').append(albumIcon);
-      $('.searchresults').append(result);
-      $('.searchresults').append('<br>');
-    }
+    let title = response.tracks.items[i].name;
+    let artist = response.tracks.items[i].artists[0].name;
+    let album = response.tracks.items[i].album.name;
+    let songInfo = document.createTextNode('Title: ' + title + ', Artist: ' + artist + ', Album: ' + album + '\n');
+    result.append(albumIcon);
+    result.append(songInfo);
+    result.draggable({
+      revert: true
+    });
+    $('.searchresults').append(result);
+    $('.searchresults').append('<br>');
+  }
 };
