@@ -1,4 +1,4 @@
-const ACCESS_TOKEN = 'BQBN66D2GmdICvQwHjWa9Bh-JRZ-Gmjd5PVvA_ZgJ7HGFlxTqO3Z39_X_Y4AAKYnH6ZHkR6vwGs50pCyLm61HqT_GlHRx2a1k5EoUJ1cq90BVf-Lp9BlqbtvUFGC-6J2WVmsvzZscF_kjf6GIaD_hLxCA6hOAHDx6OCXg4hYD42T';
+const ACCESS_TOKEN = 'BQDtZgAAtLl2dnxhGHw-KCJkRKQPiEwa7BH8zV-wo21P5L2WeGH3I-wsskCpndSuZjGfR8W9QgsePc2zH3rG3fJPaGxWDhCX4xlicrtzVz6NBLczAdOOLlwhzijsRVOHc7BJcCZjVFTZqMtT89h3qDazTRkg-aWMr4coSXxKoMnl';
 
 let playlistContent = {};
 let trackUri = '';
@@ -31,7 +31,7 @@ $('#plus').click(function() {
       for (let i = 0; i < playlistContent[newName].length; i++) {
         playlistContent[newName][i].click(function(){
           trackUri = playlistContent[newName][i][0].id;
-          fetch('https://api.spotify.com/v1/me/player/play?device_id=12967c87accca1114dff634933e2bea20d79475c', {
+          fetch('https://api.spotify.com/v1/me/player/play?device_id=51fdad1fd52fb7f835d3a0b18fbe835f88040bf0', {
             method: 'PUT',
             body: JSON.stringify({ uris: [trackUri] }),
             headers: {
@@ -94,7 +94,7 @@ let processResults = function(response) {
         }
     }).click(function(){
       trackUri = this.id;
-      fetch('https://api.spotify.com/v1/me/player/play?device_id=12967c87accca1114dff634933e2bea20d79475c', {
+      fetch('https://api.spotify.com/v1/me/player/play?device_id=51fdad1fd52fb7f835d3a0b18fbe835f88040bf0', {
         method: 'PUT',
         body: JSON.stringify({ uris: [trackUri] }),
         headers: {
