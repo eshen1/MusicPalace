@@ -36,6 +36,10 @@
          </audio>
          </div>
        </div>
+       <form action = "http://localhost:3000/index.html" method = "POST">
+          Logout: <button type='button'>Logout</button>
+          <div><input type = "submit" value = "Logout"></div>
+       </form>
    </div>
 
    <!-- <script type="text/javascript">
@@ -53,7 +57,7 @@
  <script src="https://sdk.scdn.co/spotify-player.js"></script>
  <script>
    window.onSpotifyWebPlaybackSDKReady = () => {
-     const token = 'BQDtZgAAtLl2dnxhGHw-KCJkRKQPiEwa7BH8zV-wo21P5L2WeGH3I-wsskCpndSuZjGfR8W9QgsePc2zH3rG3fJPaGxWDhCX4xlicrtzVz6NBLczAdOOLlwhzijsRVOHc7BJcCZjVFTZqMtT89h3qDazTRkg-aWMr4coSXxKoMnl';
+     const token = 'BQAbp1fNuZoKif8G5cal7mYvyYJY8_F84F0xcE1Bw3Tp2K4YQNMZFl2Jgh87HzDwCmNNd-k_uLQxe99jY54vI-B_x5xQMr6mzz_AvBgm1MDYmDJ4YJ-SLMW4G0hbJ4An7Egw8GGCuqGVUmOkO1oB0XP39CCtUH75uPldghPr95-w';
      const player = new Spotify.Player({
        name: 'Web Playback SDK Quick Start Player',
        getOAuthToken: cb => { cb(token); }
