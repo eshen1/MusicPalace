@@ -28,7 +28,12 @@
        <div id='plus'>+</div>
      </div>
        <div id='main'>
-         <div id = 'search'><input type='text' id='searchTerm' class='searchTerm' placeholder='Search..'><button id="searchButton">Search Music</button></div>
+         <div id = 'search'>
+           <input type='text' id='searchTerm' class='searchTerm' placeholder='Search..'><button id="searchButton">Search Music</button>
+           <form action = "http://localhost:3000/index.html" method = "GET">
+              <div><input type = "submit" value = "Logout"></div>
+           </form>
+         </div>
          <div class='searchresults'> </div>
          <div class='player'>
            <audio preload='auto'>
@@ -36,10 +41,6 @@
          </audio>
          </div>
        </div>
-       <form action = "http://localhost:3000/index.html" method = "POST">
-          Logout: <button type='button'>Logout</button>
-          <div><input type = "submit" value = "Logout"></div>
-       </form>
    </div>
 
    <!-- <script type="text/javascript">

@@ -10,7 +10,7 @@
     "require": "2.4.20"
   },
   "scripts": {
-    "start": "start"
+    "start": "node server.js"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.2",

@@ -49,4 +49,4 @@ app.post('/login.html', urlencodedParser, (req, res) => {
   res.sendFile(filePath);
 });
 
-let server = app.listen(3000);
+app.listen(3000);
