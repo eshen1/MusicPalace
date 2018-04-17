@@ -18,7 +18,7 @@ $('#plus').click(() => {
       text: newName,
     }).droppable();
 
-$(newPlaylist).on("drop", (event, ui) => {
+    $(newPlaylist).on('drop', (event, ui) => {
       event.preventDefault();
       event.stopPropagation();
       alert('added to' + newName);
