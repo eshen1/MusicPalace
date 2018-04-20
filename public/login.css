@@ -15,19 +15,15 @@ body, html {
     top: 0;
     left: 0;
     box-shadow: 4px 0 5px 0 grey;
-    text-shadow: 2px 2px 2px red;
-    background-color: #312e2e;
+    text-shadow: 2px 2px 2px #2d3436;
+    background-color: #b2bec3;
     overflow-x: hidden;
     padding-top: 20px;
 }
 
 .sidenav a {
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 25px;
-    display: block;
-    text-align: center;
-    color: #6accc5;
+  font-size: 35px;
+    color: #81ecec;
 }
 
 #plus {
@@ -36,7 +32,7 @@ body, html {
     font-size: 25px;
     display: block;
     text-align: center;
-    color: #e82b1e;
+    color: #81ecec;
 }
 
 #playlistNames {
@@ -45,21 +41,25 @@ body, html {
     font-size: 25px;
     display: block;
     text-align: center;
-    color: #e82b1e;
+    color: #81ecec;
 }
 
 #search {
+  width: 100%;
+  position: fixed;
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 25px;
   display: block;
   box-shadow: 4px 0 5px 0 grey;
   text-shadow: 2px 2px 2px red;
-  background-color: #312e2e;
+  background-color: #b2bec3;
 }
 
 .searchresults {
-  width: 600px;
+  height: 1200px;
+  width: 1200px;
+  background-color: #dfe6e9;
 }
 
 .sidenav a:hover {
@@ -71,12 +71,12 @@ body, html {
 }
 
 input.searchTerm {
-  font-family: 'Roboto Mono', monospace;
+  font-family: Verdana, Geneva, sans-serif;
   border: 1px solid transparent;
   box-shadow: 4px 0 5px 0 grey;
   margin: auto;
   text-shadow: 2px 2px 2px #6accc5;
-  color: #e82b1e;
+  color: #ff7675;
   background: rgba(181, 197, 202, 0.5);
 }
 
@@ -96,7 +96,7 @@ input.searchTerm {
 #label {
   text-align: center;
   padding: 5px;
-  font-family: 'Monoton', cursive;
+  font-family: Verdana, Geneva, sans-serif;
   box-shadow: 4px 0 5px 0 grey;
   text-shadow: 2px 2px 2px red;
   color: #6accc5;
