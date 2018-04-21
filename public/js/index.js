@@ -1,4 +1,4 @@
-const ACCESS_TOKEN = 'BQC8D5F4WlQEm0mtAmyBBbojUnkfH3kTC5yFzggSg-KMrZulfcyUsu8k5fSUoqKI_DRx0f4vUBUVFFd6K4s7y3Ax_Wavb8MBvnHV6uWdUr55XARnrwOKp1bTq7_D4p4BzNl5M8E8yd3bvb7fJ2goguY8-23w0c5A-K39lOKY4gE-';
+const ACCESS_TOKEN = 'BQDXDKbB9_hZnZqoXHwU2VV7thV0Iq2npHsy8Xpc5OyA23btFpGHnBureLxSwFPYr4BhSzKhF341LpuCQPTy3GYPwgQRC6M_lzlvbXT70k3J6m4JDcdQDw-QwaMaKPKt-MxWD-mPNWn_UXGZ5wnTjU9qbl2I95W-uVQXlP6wfuI4';
 
 let deviceId = ''
 let playlistContent = {};
@@ -93,16 +93,14 @@ $('#searchButton').click(function () {
   window.location.href='#Search';
   let searchQuery = document.getElementById('searchTerm').value;
     $.ajax({
-        type: 'GET',
-        url: 'https://api.spotify.com/v1/search?q=' + searchQuery + '&type=track&market=us&limit=10&offset=5',
-        headers: {
-            'Authorization': 'Bearer ' + ACCESS_TOKEN
-        },
-        success: function (response) {
-          // trackUri = response.tracks.items[0].uri;
-          processResults(response);
-          // console.log(response);
-        }
+      type: 'GET',
+      url: 'https://api.spotify.com/v1/search?q=' + searchQuery + '&type=track&market=us&limit=10&offset=5',
+      headers: {
+        'Authorization': 'Bearer ' + ACCESS_TOKEN
+      },
+      success: function (response) {
+        processResults(response);
+      }
     });
 });
 
@@ -110,7 +108,8 @@ let processResults = function(response) {
   $('.searchresults').empty();
   for (let i = 0; i < 10; i++) {
     let result = $('<div/>', {
-      id: response.tracks.items[i].uri
+      id: response.tracks.items[i].uri,
+      'class': 'result'
     });
 
     let albumIcon = $('<img />',
@@ -120,6 +119,7 @@ let processResults = function(response) {
         width: '100px',
         height: '100px',
         css: {
+          'margin-top': '10px',
           'margin-bottom': '10px'
         }
     }).click(function(){
@@ -138,7 +138,7 @@ let processResults = function(response) {
     let title = response.tracks.items[i].name;
     let artist = response.tracks.items[i].artists[0].name;
     let album = response.tracks.items[i].album.name;
-    let songInfo = document.createTextNode('Title: ' + title + ', Artist: ' + artist + ', Album: ' + album + '\n');
+    let songInfo = document.createTextNode('Title: ' + title + ' Artist: ' + artist + ', Album: ' + album);
     result.append(albumIcon);
     result.append(songInfo);
     result.draggable({

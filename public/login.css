@@ -98,6 +98,12 @@ input.searchTerm {
   height: 1200px;
   width: 100%;
   background-color: #dfe6e9;
+  color: #2d3436;
+}
+
+.result {
+  width: 700px;
+  background-color: #ff7675;
 }
 
 #main {
