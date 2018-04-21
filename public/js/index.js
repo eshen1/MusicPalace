@@ -1,7 +1,37 @@
-const ACCESS_TOKEN = 'BQAgV-hdBiRV9KjbCGKKngxBmgLF4XaQAjijlQy98w3izEV5fCWGgQylsPOJ6UaKhMf3bMutYAmM0DKjbwebsj5RY9j-yidjwBrdiVCqX5KIeQZvjBzyIdsFgABia1O4L01O1_z81SovsUA6r9cm64w8PxUKBiY4igaKewi_GM8W';
+const ACCESS_TOKEN = 'BQBFGJ9vi--erbXfWn3cPrIlXB17oX2_r-LT0AJaqhbvFSzurw559oh4O_KP_angBpoPA2Qu4hzmw3TbCWeX7-ewzyj5inToYKdFsSB49wVYpms4RjgdB18WxIA8juc8QzCIkompN0Le-5_-7fD38W5GKZZQsBtcnXAIoiegezRI';
 
+let deviceId = ''
 let playlistContent = {};
 let trackUri = '';
+
+window.onSpotifyWebPlaybackSDKReady = () => {
+  const player = new Spotify.Player({
+    name: 'Web Playback SDK Quick Start Player',
+    getOAuthToken: cb => { cb(ACCESS_TOKEN); }
+  });
+  // Error handling
+  player.addListener('initialization_error', ({ message }) => { console.error(message); });
+  player.addListener('authentication_error', ({ message }) => { console.error(message); });
+  player.addListener('account_error', ({ message }) => { console.error(message); });
+  player.addListener('playback_error', ({ message }) => { console.error(message); });
+  // Playback status updates
+  player.addListener('player_state_changed', state => { console.log(state); });
+  // Ready
+  player.addListener('ready', ({ device_id }) => {
+    console.log('Ready with Device ID', device_id);
+    deviceId = device_id;
+  });
+  // Connect to the player!
+  player.connect();
+  $('.sidenav').click(function(){
+    player.getCurrentState().then(state => {
+      if (state) {
+        player.pause();
+        return;
+      }
+    });
+  });
+};
 
 $('html').on('dragenter dragleave dragover drop', function (e) {
     e.preventDefault();
@@ -94,7 +124,7 @@ let processResults = function(response) {
         }
     }).click(function(){
       trackUri = this.id;
-      fetch('https://api.spotify.com/v1/me/player/play?device_id=2608fac21fb586ccd677a9b0bf710111d522b7f7', {
+      fetch('https://api.spotify.com/v1/me/player/play?device_id=' + deviceId, {
         method: 'PUT',
         body: JSON.stringify({ uris: [trackUri] }),
         headers: {

@@ -1,5 +1,5 @@
 #all {
-  background-color: rgba(181, 197, 202, 0.5);
+  background-color: #dfe6e9;
 }
 
 body, html {
@@ -15,14 +15,19 @@ body, html {
     top: 0;
     left: 0;
     box-shadow: 4px 0 5px 0 grey;
-    text-shadow: 2px 2px 2px #2d3436;
+    text-shadow: 1px 1px 1px #2d3436;
     background-color: #b2bec3;
     overflow-x: hidden;
-    padding-top: 20px;
+    padding-top: 10px;
+}
+
+#logo {
+  width: 50%;
+  height: 50%;
 }
 
 .sidenav a {
-  font-size: 35px;
+    font-size: 20px;
     color: #81ecec;
 }
 
@@ -45,23 +50,22 @@ body, html {
 }
 
 #search {
-  width: 100%;
-  position: fixed;
+  height: 60px;
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 25px;
   display: block;
   box-shadow: 4px 0 5px 0 grey;
-  text-shadow: 2px 2px 2px red;
+  text-shadow: 1px 1px 1px #2d3436;
   background-color: #b2bec3;
 }
 
-.searchresults {
-  height: 1200px;
-  width: 1200px;
-  background-color: #dfe6e9;
+#searchButton {
+  height: 40px;
+  box-shadow: 4px 0 5px 0 grey;
+  text-shadow: 1px 1px 1px #2d3436;
+  color: #81ecec;
 }
-
 .sidenav a:hover {
     color: #f1f1f1;
 }
@@ -70,14 +74,25 @@ body, html {
     color: #f1f1f1;
 }
 
+.searchTerm::placeholder {
+  text-shadow: none;
+  color: #2d3436;
+}
+
 input.searchTerm {
   font-family: Verdana, Geneva, sans-serif;
   border: 1px solid transparent;
   box-shadow: 4px 0 5px 0 grey;
   margin: auto;
-  text-shadow: 2px 2px 2px #6accc5;
+  text-shadow: 1px 1px 1px #2d3436;
   color: #ff7675;
-  background: rgba(181, 197, 202, 0.5);
+  background: #dfe6e9;
+}
+
+.searchresults {
+  height: 1200px;
+  width: 100%;
+  background-color: #dfe6e9;
 }
 
 #main {
@@ -98,7 +113,7 @@ input.searchTerm {
   padding: 5px;
   font-family: Verdana, Geneva, sans-serif;
   box-shadow: 4px 0 5px 0 grey;
-  text-shadow: 2px 2px 2px red;
+  text-shadow: 1px 1px 1px red;
   color: #6accc5;
   background-color: #312e2e;
 
