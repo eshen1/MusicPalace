@@ -3,10 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
-=======
     "body-parser": "^1.18.2",
->>>>>>> 72af518ae1c4960d3fc2b53bb6c2870d254c932d
     "express": "^4.16.3",
     "neo4j-driver": "^1.5.3",
     "request": "2.85.0",
