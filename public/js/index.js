@@ -42,13 +42,13 @@ $('#plus').click(function() {
   let newName = prompt('Please enter your music palace Name', 'Music');
   playlistContent[newName] = [];
   if (newName != '') {
-    let newPlaylist = $("<div/>", {
+    let newPlaylist = $('<div/>', {
       id: newName,
       href: '#'+newName,
       text: newName
     }).droppable();
 
-    $(newPlaylist).on("drop", function(event, ui) {
+    $(newPlaylist).on('drop', function(event, ui) {
       event.preventDefault();
       event.stopPropagation();
       alert('added to' + newName);
