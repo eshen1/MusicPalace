@@ -89,6 +89,11 @@ input.searchTerm {
   background: #dfe6e9;
 }
 
+#logout {
+  float: right;
+  float: top;
+}
+
 .searchresults {
   height: 1200px;
   width: 100%;
