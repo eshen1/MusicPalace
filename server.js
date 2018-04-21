@@ -49,4 +49,6 @@ app.post('/login.html', urlencodedParser, (req, res) => {
   res.sendFile(filePath);
 });
 
-app.listen(3000);
+app.listen(3000, function() {
+  console.log('Listening on', 3000);
+});
