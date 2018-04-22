@@ -113,10 +113,41 @@ input.searchTerm {
 .result {
   width: 200px;
   height: 200px;
-  /* border-style: solid;
-  border-width: 5px;
-  border-color: #2d3436;
-  background-color: #ff7675; */
+}
+
+.albumIconContainer {
+  width: 150px;
+  height: 150px;
+  position: relative;
+}
+
+.songIcon {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  opacity : 1;
+  transition: .5s ease
+}
+
+#playButton {
+  font-size: 75px;
+  color: #2d3436;
+  background: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  transition: .5s ease;
+  opacity: 0;
+}
+
+.albumIconContainer:hover .songIcon {
+  opacity: 0.3;
+}
+
+.albumIconContainer:hover #playButton {
+  opacity: 1;
 }
 
 .songInfo {

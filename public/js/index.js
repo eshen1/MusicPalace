@@ -1,4 +1,4 @@
-const ACCESS_TOKEN = 'BQBYYIVk8KVWBOXWykWIq-Nep3kHAv0pPCvIzKL19Fc8Ghxi-54puMz8-psFaRn2TMAOQuJf-i8ScxE56IBexaSZ3wVGI0ft-NkCHv0JjX5mNK0Zl0P2etJaPxOAbvO0Rm1y4SPMxA20nt4bf7w9iXXecX3IF_niDEGzzSlLaAlw';
+const ACCESS_TOKEN = 'BQA1acdaB2CZ5BIUVrC9dNJKpZ4wPMfyoM8si_nM0v8A9c3JIRLaXz8icdc75lyE10_j663KCtuchToyNr0ZshW1DSYv1kHUvRwTC6oZDhltPJTa-yk5z4CClDu_uoCFu3nYD634cjU_6T3lxE1rlwXh5QaPjXpcC82iqCSUv-x6';
 
 let deviceId = ''
 let playlistContent = {};
@@ -61,7 +61,7 @@ $('#plus').click(function() {
       for (let i = 0; i < playlistContent[newName].length; i++) {
         playlistContent[newName][i].click(function(){
           trackUri = playlistContent[newName][i][0].id;
-          fetch('https://api.spotify.com/v1/me/player/play?device_id=2608fac21fb586ccd677a9b0bf710111d522b7f7', {
+          fetch('https://api.spotify.com/v1/me/player/play?device_id=' + deviceId, {
             method: 'PUT',
             body: JSON.stringify({ uris: [trackUri] }),
             headers: {
@@ -117,15 +117,18 @@ let processResults = function(response) {
         id: response.tracks.items[i].uri,
         src: response.tracks.items[i].album.images[0].url,
         width: '150px',
-        height: '150px',
-        css: {
-          'display': 'block',
-          'margin-left': 'auto',
-          'margin-right': 'auto',
-          // 'width': '50%'
-        }
-    }).click(function(){
-      trackUri = this.id;
+        height: '150px'
+    });
+
+    let $playButton = $('<i/>',
+      { 'class': 'fa fa-play-circle-o',
+        id: 'playButton'
+      });
+
+    let $iconContainer = $('<div/>',
+    { 'class': 'albumIconContainer'
+    }).append(albumIcon).append($playButton).click(function(){
+      trackUri = response.tracks.items[i].uri;
       fetch('https://api.spotify.com/v1/me/player/play?device_id=' + deviceId, {
         method: 'PUT',
         body: JSON.stringify({ uris: [trackUri] }),
@@ -144,7 +147,7 @@ let processResults = function(response) {
       { 'class': 'songInfo'
     }).append($('<li>'+ title +'<li/>')).append($('<li>'+' Artist: ' + artist +'<li/>')).append($('<li>'+'Album: ' + album+'<li/>'));
 
-    result.append(albumIcon).append(songInfo);
+    result.append($iconContainer).append(songInfo);
     result.draggable({
       revert: true
     });
