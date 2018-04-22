@@ -1,4 +1,4 @@
-const ACCESS_TOKEN = 'BQDU_pphUQKxE6ZRNkvg4xUsw2WAQot1fCkxcwPh9HjmIYu53E1Fm1PcTmACPEt7oGicnYwjR28iUPZ3xXMLJ-DXyvLN23bQSDGBRxkM_V581D0uf2HdNuHM7h3L_1RCtEqkPMHo64sQXWfmMIGNACGFn5Go0SK42PdyCHRlRX11';
+const ACCESS_TOKEN = 'BQDyVYYhhtccDkLKeoW6XCS-W0IflDQsNzTcULbUJ8APThpG8oFWXH9KlKM2RnSTiY59cSe6eY8R8LF8kYmayt32wdsnxsgStMOHEza76IjVgSh15QsdaRdTfo1WC0-wDq31w97vNpfYqcbHiyh4fa3us9GGoXYkEjmczS6ttufa';
 
 let deviceId = ''
 let playlistContent = {};
@@ -116,8 +116,8 @@ let processResults = function(response) {
       { 'class': 'songIcon',
         id: response.tracks.items[i].uri,
         src: response.tracks.items[i].album.images[0].url,
-        width: '100px',
-        height: '100px',
+        width: '50px',
+        height: '50px',
         css: {
           'margin-top': '10px',
           'margin-bottom': '10px'
@@ -138,9 +138,11 @@ let processResults = function(response) {
     let title = response.tracks.items[i].name;
     let artist = response.tracks.items[i].artists[0].name;
     let album = response.tracks.items[i].album.name;
-    let songInfo = document.createTextNode('Title: ' + title + ' Artist: ' + artist + ', Album: ' + album);
-    result.append(albumIcon);
-    result.append(songInfo);
+    let songInfo = $('<ul/>',
+      { 'class': 'songInfo'
+    }).append($('<li>'+'Title: ' + title +'<li/>')).append($('<li>'+' Artist: ' + artist +'<li/>')).append($('<li>'+'Album: ' + album+'<li/>'));
+
+    result.append(albumIcon).append(songInfo);
     result.draggable({
       revert: true
     });

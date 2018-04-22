@@ -106,11 +106,19 @@ input.searchTerm {
 
 .result {
   margin-left: 165px;
-  width: 700px;
+  width: 400px;
   border-style: solid;
   border-width: 5px;
   border-color: #2d3436;
   background-color: #ff7675;
+}
+
+.songInfo {
+  font-family: Verdana, Geneva, sans-serif;
+  float: right;
+  width: 333px;
+  height: 100%;
+  list-style-type: none;
 }
 
 #main {
@@ -122,7 +130,6 @@ input.searchTerm {
 .player {
   position: fixed;
   bottom: 0px;
-  width:100%;
   z-index: 1;
 }
 
