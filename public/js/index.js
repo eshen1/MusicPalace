@@ -94,7 +94,7 @@ $('#searchButton').click(function () {
   let searchQuery = document.getElementById('searchTerm').value;
     $.ajax({
       type: 'GET',
-      url: 'https://api.spotify.com/v1/search?q=' + searchQuery + '&type=track&market=us&limit=10&offset=5',
+      url: 'https://api.spotify.com/v1/search?q=' + searchQuery + '&type=track&market=us&limit=50&offset=5',
       headers: {
         'Authorization': 'Bearer ' + ACCESS_TOKEN
       },
@@ -106,7 +106,7 @@ $('#searchButton').click(function () {
 
 let processResults = function(response) {
   $('.searchresults').empty();
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; (i < 50) && (response.tracks.items[i].uri !== undefined); i++) {
     let result = $('<div/>', {
       id: response.tracks.items[i].uri,
       'class': 'result'

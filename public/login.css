@@ -100,7 +100,7 @@ input.searchTerm {
 
 .searchresults {
   margin-left: 165px;
-  height: 1200px;
+  height: 100%;
   width: 100%;
   background-color: #dfe6e9;
   color: #2d3436;
