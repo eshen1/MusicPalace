@@ -5,6 +5,7 @@
 body, html {
     height: 100%;
     margin: 0;
+    overflow-x: hidden;
 }
 
 .sidenav {
@@ -98,26 +99,31 @@ input.searchTerm {
 }
 
 .searchresults {
+  margin-left: 165px;
   height: 1200px;
   width: 100%;
   background-color: #dfe6e9;
   color: #2d3436;
+  display: grid;
+  grid-template-columns: 100px 100px 100px 100px 100px 100px;
+  grid-template-rows: 150px 150px 150px 150px;
+  grid-gap: 90px;
 }
 
 .result {
-  margin-left: 165px;
-  width: 400px;
-  border-style: solid;
+  width: 200px;
+  height: 200px;
+  /* border-style: solid;
   border-width: 5px;
   border-color: #2d3436;
-  background-color: #ff7675;
+  background-color: #ff7675; */
 }
 
 .songInfo {
   font-family: Verdana, Geneva, sans-serif;
-  float: right;
-  width: 333px;
+  font-size: 12px;
   height: 100%;
+  text-align: left;
   list-style-type: none;
 }
 

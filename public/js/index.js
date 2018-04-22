@@ -1,4 +1,4 @@
-const ACCESS_TOKEN = 'BQDyVYYhhtccDkLKeoW6XCS-W0IflDQsNzTcULbUJ8APThpG8oFWXH9KlKM2RnSTiY59cSe6eY8R8LF8kYmayt32wdsnxsgStMOHEza76IjVgSh15QsdaRdTfo1WC0-wDq31w97vNpfYqcbHiyh4fa3us9GGoXYkEjmczS6ttufa';
+const ACCESS_TOKEN = 'BQBYYIVk8KVWBOXWykWIq-Nep3kHAv0pPCvIzKL19Fc8Ghxi-54puMz8-psFaRn2TMAOQuJf-i8ScxE56IBexaSZ3wVGI0ft-NkCHv0JjX5mNK0Zl0P2etJaPxOAbvO0Rm1y4SPMxA20nt4bf7w9iXXecX3IF_niDEGzzSlLaAlw';
 
 let deviceId = ''
 let playlistContent = {};
@@ -116,11 +116,13 @@ let processResults = function(response) {
       { 'class': 'songIcon',
         id: response.tracks.items[i].uri,
         src: response.tracks.items[i].album.images[0].url,
-        width: '50px',
-        height: '50px',
+        width: '150px',
+        height: '150px',
         css: {
-          'margin-top': '10px',
-          'margin-bottom': '10px'
+          'display': 'block',
+          'margin-left': 'auto',
+          'margin-right': 'auto',
+          // 'width': '50%'
         }
     }).click(function(){
       trackUri = this.id;
@@ -140,14 +142,14 @@ let processResults = function(response) {
     let album = response.tracks.items[i].album.name;
     let songInfo = $('<ul/>',
       { 'class': 'songInfo'
-    }).append($('<li>'+'Title: ' + title +'<li/>')).append($('<li>'+' Artist: ' + artist +'<li/>')).append($('<li>'+'Album: ' + album+'<li/>'));
+    }).append($('<li>'+ title +'<li/>')).append($('<li>'+' Artist: ' + artist +'<li/>')).append($('<li>'+'Album: ' + album+'<li/>'));
 
     result.append(albumIcon).append(songInfo);
     result.draggable({
       revert: true
     });
     $('.searchresults').append(result);
-    $('.searchresults').append('<br>');
+    // $('.searchresults').append('<br>');
   }
 
 };
