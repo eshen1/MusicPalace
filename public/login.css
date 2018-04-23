@@ -108,11 +108,14 @@ input.searchTerm {
   grid-template-columns: 100px 100px 100px 100px 100px 100px;
   grid-template-rows: 150px 150px 150px 150px;
   grid-gap: 90px;
+  text-align: center;
+  position: relative;
 }
 
 .result {
   width: 200px;
   height: 200px;
+  position: relative;
 }
 
 .albumIconContainer {
@@ -126,7 +129,7 @@ input.searchTerm {
   margin-left: auto;
   margin-right: auto;
   opacity : 1;
-  transition: .5s ease
+  transition: .5s ease;
 }
 
 #playButton {
@@ -153,9 +156,8 @@ input.searchTerm {
 .songInfo {
   font-family: Verdana, Geneva, sans-serif;
   font-size: 12px;
-  height: 100%;
-  text-align: left;
   list-style-type: none;
+  transform: translateX(-50px);
 }
 
 #main {

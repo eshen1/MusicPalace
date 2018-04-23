@@ -1,4 +1,4 @@
-const ACCESS_TOKEN = 'BQA1acdaB2CZ5BIUVrC9dNJKpZ4wPMfyoM8si_nM0v8A9c3JIRLaXz8icdc75lyE10_j663KCtuchToyNr0ZshW1DSYv1kHUvRwTC6oZDhltPJTa-yk5z4CClDu_uoCFu3nYD634cjU_6T3lxE1rlwXh5QaPjXpcC82iqCSUv-x6';
+const ACCESS_TOKEN = 'BQCWne36jOGJRHuvOmWC7t0ErHXzvxnvo3zv8PkJNGOUxRLO_zxFq47KaIK99t_sMAYb2utUZb24uJ8mkPZg92X8RCqQiMkNgz5zgB2iLbFQK3qsIy9mzNLkjDnuBFLkb71b3pML7TFmmKz9IWal0piR5GJ-jx0F_adsrDXoBlUW';
 
 let deviceId = ''
 let playlistContent = {};
