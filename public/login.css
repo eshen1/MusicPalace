@@ -105,8 +105,8 @@ input.searchTerm {
   background-color: #dfe6e9;
   color: #2d3436;
   display: grid;
-  grid-template-columns: 100px 100px 100px 100px 100px 100px;
-  grid-template-rows: 150px 150px 150px 150px;
+  grid-template-columns: 100px 100px 100px 100px 100px 100px 100px;
+  grid-template-rows: 150px 150px 150px 150px 150px;
   grid-gap: 90px;
   text-align: center;
   position: relative;
