@@ -160,6 +160,10 @@ input.searchTerm {
   transform: translateX(-50px);
 }
 
+#title {
+  font-weight: bold;
+}
+
 #main {
     /* margin-left: 160px; /* Same as the width of the sidebar */
     height: 100%;

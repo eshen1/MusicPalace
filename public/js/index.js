@@ -1,4 +1,4 @@
-const ACCESS_TOKEN = 'BQCWne36jOGJRHuvOmWC7t0ErHXzvxnvo3zv8PkJNGOUxRLO_zxFq47KaIK99t_sMAYb2utUZb24uJ8mkPZg92X8RCqQiMkNgz5zgB2iLbFQK3qsIy9mzNLkjDnuBFLkb71b3pML7TFmmKz9IWal0piR5GJ-jx0F_adsrDXoBlUW';
+const ACCESS_TOKEN = 'BQDQ2LPp2vLe-9xp2-DjuVVC-Z36oKSJihZ85u9J0-qKM3i-dbwMUrNNjFDPG78Zeft4SOQdnW_X7fVB99LMzxeVFp5nSf-jB1HwxtBHIPh0XM0oK1yQhdIp3wUMH7CicTHYxVd9CzxCKr6FYU6mZxe0a3HbWKCznCg_BF0hKz6D';
 
 let deviceId = ''
 let playlistContent = {};
@@ -145,7 +145,7 @@ let processResults = function(response) {
     let album = response.tracks.items[i].album.name;
     let songInfo = $('<ul/>',
       { 'class': 'songInfo'
-    }).append($('<li>'+ title +'<li/>')).append($('<li>'+' Artist: ' + artist +'<li/>')).append($('<li>'+'Album: ' + album+'<li/>'));
+    }).append($('<li id=title>'+ title +'<li/>')).append($('<li id=artist>'+' Artist: ' + artist +'<li/>')).append($('<li id=album>'+'Album: ' + album+'<li/>'));
 
     result.append($iconContainer).append(songInfo);
     result.draggable({
