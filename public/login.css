@@ -29,7 +29,7 @@ body, html {
 
 .sidenav a {
     font-size: 20px;
-    color: #81ecec;
+    color: #6c5ce7;
 }
 
 #plus {
@@ -38,7 +38,7 @@ body, html {
     font-size: 25px;
     display: block;
     text-align: center;
-    color: #81ecec;
+    color: #6c5ce7;
 }
 
 #playlistNames {
@@ -47,7 +47,7 @@ body, html {
     font-size: 25px;
     display: block;
     text-align: center;
-    color: #81ecec;
+    color: #6c5ce7;
 }
 
 #search {
@@ -74,8 +74,12 @@ body, html {
   text-shadow: 1px 1px 1px #2d3436;
   color: #81ecec;
 }
-.sidenav a:hover, .sidenav div:hover {
+.sidenav a:hover, .sidenav div:hover, #plus:hover {
     color: #f1f1f1;
+}
+
+#logout:hover, #searchButton:hover {
+  color: #b2bec3;
 }
 
 .searchTerm::placeholder {
