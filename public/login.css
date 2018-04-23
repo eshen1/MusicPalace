@@ -66,13 +66,13 @@ body, html {
   height: 40px;
   box-shadow: 4px 0 5px 0 grey;
   text-shadow: 1px 1px 1px #2d3436;
-  color: #81ecec;
+  color: #6c5ce7;
 }
 #logout {
   height: 40px;
   box-shadow: 4px 0 5px 0 grey;
   text-shadow: 1px 1px 1px #2d3436;
-  color: #81ecec;
+  color: #6c5ce7;
 }
 .sidenav a:hover, .sidenav div:hover, #plus:hover {
     color: #f1f1f1;
@@ -202,7 +202,15 @@ input.searchTerm {
    align-items: center;
    justify-content: center;
    transform: translateY(-55%);
+   text-shadow: 2px 2px 2px #2d3436;
  }
+
+ .material-icons:hover {
+   border-style: solid;
+   color: #6c5ce7;
+   background: #dfe6e9;
+ }
+
 i {
    color: #FFF;
    background: #6c5ce7;
