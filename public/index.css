@@ -124,6 +124,15 @@ input.searchTerm {
 
 }
 
+#node {
+  text-align: center;
+  padding: 5px;
+  font-family: 'Monoton', cursive;
+  font-size: 20px;
+  color: red;
+
+}
+
 #user{
   text-align: center;
   padding: 5px;

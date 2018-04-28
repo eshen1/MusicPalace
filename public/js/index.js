@@ -8,33 +8,42 @@ let trackUri = '';
 let checkEmail = (text) => {
   let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if(re.test(text) === false) {
-    alert('invalid email');
+    let node = document.createElement("div");
+    node.id = 'node';
+    let textnode = document.createTextNode("Invalid email");
+    node.appendChild(textnode);
+    document.getElementById("pass").appendChild(node);
     return false;
   }
   return true;
 }
 
 let checkPass = (text) => {
-    if (text.length < 5) {
-      alert('password not long enough');
+    if (text.length <= 5) {
+      let node = document.createElement("div");
+      node.id = 'node';
+      let textnode = document.createTextNode("Password needs to be length of 6 or more");
+      node.appendChild(textnode);
+      document.getElementById("pass").appendChild(node);
+      return false;
     }
+    return true;
 }
 
-// $('#buttons').click(function() {
-//
-//   if(checkEmail(document.getElementById('email').value)){
-//     checkPass(document.getElementById('passw').value);
-//   }
-//
-//   window.userName = document.getElementById('person2').value;
-//   console.log(window.userName);
-// });
-// $.ajax({
-//   url: 'http://localhost:3000/index.html',
-//   data: document.getElementById('person'),
-//   success: success,
-//   dataType: JSON,
-// });
+$('#buttons').click(function() {
+  if(document.getElementById('pass').childNodes.length > 3) {
+    document.getElementById('pass').removeChild(document.getElementById('pass').childNodes[3]);
+  }
+  if(checkEmail(document.getElementById('email').value)){
+    if (checkPass(document.getElementById('passw').value)) {
+      let node = document.createElement("div");
+      node.id = 'node';
+      let textnode = document.createTextNode("Registered");
+      node.appendChild(textnode);
+      document.getElementById("pass").appendChild(node);    }
+  }
+});
+
 
 window.onSpotifyWebPlaybackSDKReady = () => {
   const player = new Spotify.Player({
@@ -116,10 +125,7 @@ $('#plus').click(function() {
 //     }
 //   </script>
 
-$('#buttons').click(function() {
-  document.getElementById('homepage').style.display = 'block';
-  document.getElementById('loginpage').style.display = 'none';
-});
+
 
 $('#searchButton').click(function () {
   window.location.href='#Search';

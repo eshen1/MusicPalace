@@ -18,6 +18,21 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 app.use(express.static('public'));
 
+let checkEmail = (text) => {
+  let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if(re.test(text) === false) {
+    return false;
+  }
+  return true;
+}
+
+let checkPass = (text) => {
+    if (text.length <= 5) {
+      return false;
+    }
+    return true;
+}
+
 app.get('/index.html', (req, res) => {
   const fullPath = path.join(__dirname, '/index.html');
 
@@ -30,22 +45,29 @@ app.post('/login.html', urlencodedParser, (req, res) => {
     email: req.body.email,
     password: req.body.password,
   };
-  if (response.email != undefined && response.password != undefined) {
-    session
-      .run(query, { emailParam: response.email, passwordParam: response.password })
-      .subscribe({
-        onNext: (record) => {
-          console.log(record.get('name'));
-        },
-        onCompleted: () => {
-          session.close();
-        },
-        onError: (error) => {
-          console.log(error);
-        },
-      });
+  if (checkEmail(response.email)) {
+    if (checkPass(response.password)) {
+      if (response.email != undefined && response.password != undefined) {
+        session
+          .run(query, { emailParam: response.email, passwordParam: response.password })
+          .subscribe({
+            onNext: (record) => {
+              console.log(record.get('name'));
+            },
+            onCompleted: () => {
+              session.close();
+            },
+            onError: (error) => {
+              console.log(error);
+            },
+          });
 
-    console.log(response);
+        console.log(response);
+
+        const filePath = path.join(__dirname, '/public/login.html');
+        res.sendFile(filePath);
+      }
+    }
   }
 
   let responses = {
@@ -53,29 +75,28 @@ app.post('/login.html', urlencodedParser, (req, res) => {
     playlistParam: req.body.playlistParam
   };
 
-  if (responses.playlistParam != undefined) {
-    console.log("Do I get called?");
-    console.log(response);
-    console.log(responses.email + " response.email");
-    console.log(responses.playlistParam + " playlist");
+  const filePath = path.join(__dirname, '/public/index.html');
+  // if (responses.playlistParam != undefined) {
+  //   console.log("Do I get called?");
+  //   console.log(response);
+  //   console.log(responses.email + " response.email");
+  //   console.log(responses.playlistParam + " playlist");
+  //
+  //   session
+  //     .run(query2, { playlistParam: responses.playlistParam })
+  //     .subscribe({
+  //       onNext: (record) => {
+  //         console.log(record.get('name'));
+  //       },
+  //       onCompleted: () => {
+  //         session.close();
+  //       },
+  //       onError: (error) => {
+  //         console.log(error);
+  //       },
+  //     });
+  // }
 
-    session
-      .run(query2, { playlistParam: responses.playlistParam })
-      .subscribe({
-        onNext: (record) => {
-          console.log(record.get('name'));
-        },
-        onCompleted: () => {
-          session.close();
-        },
-        onError: (error) => {
-          console.log(error);
-        },
-      });
-  }
-
-  const filePath = path.join(__dirname, '/public/login.html');
-  res.sendFile(filePath);
 });
 
 app.put('/login.html', urlencodedParser, (req, res) => {
