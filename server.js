@@ -37,7 +37,7 @@ let checkPass = (text) => {
       return false;
     }
     else {
-      return false;
+      return true;
     }
 }
 
