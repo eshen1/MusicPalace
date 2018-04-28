@@ -3,6 +3,8 @@
   <link rel="stylesheet" href="index.css">
   <head>
   <title> Music Palace </title>
+  <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+  <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Dhurjati|Dosis|Josefin+Sans|Roboto+Mono|Ubuntu" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Contrail+One|Josefin+Sans|Monoton|Prompt" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -16,17 +18,19 @@
       <div class="container">
         <div id="pass">
           <form action = "http://localhost:3000/login.html" method = "POST">
-             Email : <input type = "text" name = "email"> <br>
-             Password : <input type = "text" name = "password">
+             Email : <input type = "text" name = "email" id = "email"> <br>
+             Password : <input type = "password" name = "password" id="passw">
+             <div id="buttons">
+               <button type="button" id = "person">Register</button>
+             </div>
              <div><input type = "submit" value = "Login"></div>
           </form>
-        </div>
-
-        <div id="buttons">
-          <button type="button">Register</button>
         </div>
 
       </div>
     </div>
   </body>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="/js/index.js"></script>
+  <script src="https://sdk.scdn.co/spotify-player.js"></script>
 </html>

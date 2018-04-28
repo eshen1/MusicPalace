@@ -4,6 +4,38 @@ let deviceId = ''
 let playlistContent = {};
 let trackUri = '';
 
+
+let checkEmail = (text) => {
+  let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if(re.test(text) === false) {
+    alert('invalid email');
+    return false;
+  }
+  return true;
+}
+
+let checkPass = (text) => {
+    if (text.length < 5) {
+      alert('password not long enough');
+    }
+}
+
+$('#buttons').click(function() {
+
+  if(checkEmail(document.getElementById('email').value)){
+    checkPass(document.getElementById('passw').value);
+  }
+  
+  window.userName = document.getElementById('person2').value;
+  console.log(window.userName);
+});
+// $.ajax({
+//   url: 'http://localhost:3000/index.html',
+//   data: document.getElementById('person'),
+//   success: success,
+//   dataType: JSON,
+// });
+
 window.onSpotifyWebPlaybackSDKReady = () => {
   const player = new Spotify.Player({
     name: 'Web Playback SDK Quick Start Player',
