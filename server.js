@@ -76,27 +76,7 @@ app.post('/login.html', urlencodedParser, (req, res) => {
   };
 
   const filePath = path.join(__dirname, '/public/index.html');
-  // if (responses.playlistParam != undefined) {
-  //   console.log("Do I get called?");
-  //   console.log(response);
-  //   console.log(responses.email + " response.email");
-  //   console.log(responses.playlistParam + " playlist");
-  //
-  //   session
-  //     .run(query2, { playlistParam: responses.playlistParam })
-  //     .subscribe({
-  //       onNext: (record) => {
-  //         console.log(record.get('name'));
-  //       },
-  //       onCompleted: () => {
-  //         session.close();
-  //       },
-  //       onError: (error) => {
-  //         console.log(error);
-  //       },
-  //     });
-  // }
-
+  res.redirect('back');
 });
 
 app.put('/login.html', urlencodedParser, (req, res) => {
