@@ -1,4 +1,4 @@
-const ACCESS_TOKEN = 'BQDQ2LPp2vLe-9xp2-DjuVVC-Z36oKSJihZ85u9J0-qKM3i-dbwMUrNNjFDPG78Zeft4SOQdnW_X7fVB99LMzxeVFp5nSf-jB1HwxtBHIPh0XM0oK1yQhdIp3wUMH7CicTHYxVd9CzxCKr6FYU6mZxe0a3HbWKCznCg_BF0hKz6D';
+const ACCESS_TOKEN = 'BQCF5GlIdOt-SFUNIL3-VzUJtMO7GWpMHhx1UYZicaKMtohHafML7zbD6KwXdH_tFbnhdCHUxTxTFKcQbWaDKL5ncnakZchbIj56x2C4MUMvNLmsz8V-gPLOAa9iwyUn-sDgEamoHVuedNh3hiVpXQJNSLwYb5MkP4lgBqeO97Jq';
 
 let deviceId = ''
 let playlistContent = {};
@@ -25,7 +25,7 @@ $('#buttons').click(function() {
   if(checkEmail(document.getElementById('email').value)){
     checkPass(document.getElementById('passw').value);
   }
-  
+
   window.userName = document.getElementById('person2').value;
   console.log(window.userName);
 });
