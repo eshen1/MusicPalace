@@ -24,80 +24,57 @@ app.get('/index.html', (req, res) => {
   res.sendFile(fullPath);
 });
 
-let checkEmail = (text) => {
-  let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  if(re.test(text) === false) {
-    return false;
-  }
-  return true;
-}
-
-let checkPass = (text) => {
-    if (text.length < 5) {
-      return false;
-    }
-    else {
-      return true;
-    }
-}
-
 app.post('/login.html', urlencodedParser, (req, res) => {
   // Prepare output in JSON format
   response = {
     email: req.body.email,
     password: req.body.password,
   };
-  if (checkEmail(response.email)) {
-    if (checkPass(response.password)) {
-      if (response.email != undefined && response.password != undefined) {
-        session
-          .run(query, { emailParam: response.email, passwordParam: response.password })
-          .subscribe({
-            onNext: (record) => {
-              console.log(record.get('name'));
-            },
-            onCompleted: () => {
-              session.close();
-            },
-            onError: (error) => {
-              console.log(error);
-            },
-          });
+  if (response.email != undefined && response.password != undefined) {
+    session
+      .run(query, { emailParam: response.email, passwordParam: response.password })
+      .subscribe({
+        onNext: (record) => {
+          console.log(record.get('name'));
+        },
+        onCompleted: () => {
+          session.close();
+        },
+        onError: (error) => {
+          console.log(error);
+        },
+      });
 
-        console.log(response);
-      }
-
-      let responses = {
-        email: req.body.email,
-        playlistParam: req.body.playlistParam
-      };
-
-      if (responses.playlistParam != undefined) {
-        console.log("Do I get called?");
-        console.log(response);
-        console.log(responses.email + " response.email");
-        console.log(responses.playlistParam + " playlist");
-
-        session
-          .run(query2, { playlistParam: responses.playlistParam })
-          .subscribe({
-            onNext: (record) => {
-              console.log(record.get('name'));
-            },
-            onCompleted: () => {
-              session.close();
-            },
-            onError: (error) => {
-              console.log(error);
-            },
-          });
-      }
-
-      const filePath = path.join(__dirname, '/public/login.html');
-      res.sendFile(filePath);
-    }
+    console.log(response);
   }
-  const filePath = path.join(__dirname, '/public/index.html');
+
+  let responses = {
+    email: req.body.email,
+    playlistParam: req.body.playlistParam
+  };
+
+  if (responses.playlistParam != undefined) {
+    console.log("Do I get called?");
+    console.log(response);
+    console.log(responses.email + " response.email");
+    console.log(responses.playlistParam + " playlist");
+
+    session
+      .run(query2, { playlistParam: responses.playlistParam })
+      .subscribe({
+        onNext: (record) => {
+          console.log(record.get('name'));
+        },
+        onCompleted: () => {
+          session.close();
+        },
+        onError: (error) => {
+          console.log(error);
+        },
+      });
+  }
+
+  const filePath = path.join(__dirname, '/public/login.html');
   res.sendFile(filePath);
 });
 

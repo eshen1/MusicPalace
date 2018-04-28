@@ -20,15 +20,15 @@ let checkPass = (text) => {
     }
 }
 
-$('#buttons').click(function() {
-
-  if(checkEmail(document.getElementById('email').value)){
-    checkPass(document.getElementById('passw').value);
-  }
-
-  window.userName = document.getElementById('person2').value;
-  console.log(window.userName);
-});
+// $('#buttons').click(function() {
+//
+//   if(checkEmail(document.getElementById('email').value)){
+//     checkPass(document.getElementById('passw').value);
+//   }
+//
+//   window.userName = document.getElementById('person2').value;
+//   console.log(window.userName);
+// });
 // $.ajax({
 //   url: 'http://localhost:3000/index.html',
 //   data: document.getElementById('person'),
