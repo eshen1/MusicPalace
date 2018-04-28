@@ -1,4 +1,4 @@
-const ACCESS_TOKEN = 'BQCF5GlIdOt-SFUNIL3-VzUJtMO7GWpMHhx1UYZicaKMtohHafML7zbD6KwXdH_tFbnhdCHUxTxTFKcQbWaDKL5ncnakZchbIj56x2C4MUMvNLmsz8V-gPLOAa9iwyUn-sDgEamoHVuedNh3hiVpXQJNSLwYb5MkP4lgBqeO97Jq';
+const ACCESS_TOKEN = 'BQCRJkgO8BW_evfqW51eJ37nqHwrRDaXHQC-CKDTZEvwprYSShGhFwptcYAiQWGCrXCokNVxFBCbuhugXpuWInDzgRbr2JLoaA108N5w770n0LrR_Ij7ipNRM_jxK1THOuOD_HUnSIPnejGIh80KgG_XoTdOKUfC8Xj9pq0vsStI';
 
 let deviceId = ''
 let playlistContent = {};
@@ -64,10 +64,11 @@ window.onSpotifyWebPlaybackSDKReady = () => {
   });
   // Connect to the player!
   player.connect();
-  $('.sidenav').click(function(){
+  $('.play').click(function() {
     player.getCurrentState().then(state => {
       if (state) {
         player.pause();
+        document.querySelector('.play').innerHTML = 'play_arrow';
         return;
       }
     });
@@ -110,7 +111,7 @@ $('#plus').click(function() {
               'Authorization': 'Bearer ' + ACCESS_TOKEN
             },
           });
-          console.log(playlistContent[newName][i][0].id);
+          document.querySelector('.play').innerHTML = 'pause';
         })
         $('.searchresults').append(playlistContent[newName][i]);
       }
@@ -175,7 +176,7 @@ let processResults = function(response) {
           'Authorization': 'Bearer ' + ACCESS_TOKEN
         },
       });
-      console.log(this.id);
+      document.querySelector('.play').innerHTML = 'pause';
     });
 
     let title = response.tracks.items[i].name;
