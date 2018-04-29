@@ -10,7 +10,8 @@ const driver = neo4j.driver('bolt://localhost:7687', neo4j.auth.basic('neo4j', '
 const session = driver.session();
 
 const query = 'MERGE (user:User { email:{emailParam} , password: {passwordParam} } )';
-const query2 = 'MATCH (n:User) WHERE n.email = "hello" SET n.playlist = {playlistParam}';
+const query2 = 'Match (n:User) WHERE n.email = {emailParam} and n.password = {passwordParam} return n';
+const query3 = 'MATCH (n:User) WHERE n.email = "hello" SET n.playlist = {playlistParam}';
 let response = {};
 
 // Create application/x-www-form-urlencoded parser
@@ -33,13 +34,39 @@ let checkPass = (text) => {
     return true;
 }
 
+let checkUser = (params) => {
+  console.log(params);
+  let imBad = false;
+  session
+    .run(query2, { emailParam: params.email, passwordParam: params.password })
+    .subscribe({
+      onNext: (record) => {
+        console.log(record);
+        if (record === []) {
+          imBad = false;
+        } else {
+          imBad = true;
+        }
+      },
+      onCompleted: () => {
+        session.close();
+        console.log(imBad);
+        return imBad;
+      },
+      onError: (error) => {
+        console.log(error);
+      },
+    });
+  return imBad;
+};
+
 app.get('/index.html', (req, res) => {
   const fullPath = path.join(__dirname, '/index.html');
 
   res.sendFile(fullPath);
 });
 
-app.post('/login.html', urlencodedParser, (req, res) => {
+app.post('/homepage.html', urlencodedParser, (req, res) => {
   // Prepare output in JSON format
   response = {
     email: req.body.email,
@@ -64,7 +91,7 @@ app.post('/login.html', urlencodedParser, (req, res) => {
 
         console.log(response);
 
-        const filePath = path.join(__dirname, '/public/login.html');
+        const filePath = path.join(__dirname, '/public/homepage.html');
         res.sendFile(filePath);
       }
     }
@@ -98,7 +125,7 @@ app.post('/login.html', urlencodedParser, (req, res) => {
   // }
 });
 
-app.put('/login.html', urlencodedParser, (req, res) => {
+app.put('/homepage.html', urlencodedParser, (req, res) => {
   // Prepare output in JSON format
 
   console.log(response);
