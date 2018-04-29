@@ -136,20 +136,9 @@ window.onSpotifyWebPlaybackSDKReady = () => {
         for (let i = 0; i < playlistContent[newName].length; i++) {
           playlistContent[newName][i].click(function(){
             trackUri = playlistContent[newName][i][0].id;
-            fetch('https://api.spotify.com/v1/me/player/play?device_id=' + deviceId, {
-              method: 'PUT',
-              body: JSON.stringify({ uris: [trackUri] }),
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + ACCESS_TOKEN
-              },
-            });
-            document.querySelector('.play').innerHTML = 'pause';
             trackIndex = $(this).index();
             console.log(trackIndex);
-            document.getElementById('playerIcon').src = $('img', $(this)).attr('src');
-            document.getElementById('playerIcon').style.width = '186px';
-            document.getElementById('playerIcon').style.height = '186px';
+            play();
           });
           $('.searchresults').append(playlistContent[newName][i]);
         }
@@ -207,20 +196,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
       { 'class': 'albumIconContainer'
       }).append(albumIcon).append($playButton).click(function(){
         trackUri = response.tracks.items[i].uri;
-        fetch('https://api.spotify.com/v1/me/player/play?device_id=' + deviceId, {
-          method: 'PUT',
-          body: JSON.stringify({ uris: [trackUri] }),
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + ACCESS_TOKEN
-          },
-        });
-        // trackIndex = $(this).index();
-        // console.log($(this));
-        document.querySelector('.play').innerHTML = 'pause';
-        document.getElementById('playerIcon').src = response.tracks.items[i].album.images[0].url;
-        document.getElementById('playerIcon').style.width = '186px';
-        document.getElementById('playerIcon').style.height = '186px';
+        play();
       });
 
       let title = response.tracks.items[i].name;
