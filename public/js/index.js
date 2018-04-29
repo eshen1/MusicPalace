@@ -196,6 +196,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
       { 'class': 'albumIconContainer'
       }).append(albumIcon).append($playButton).click(function(){
         trackUri = response.tracks.items[i].uri;
+        trackIndex = i;
         play();
       });
 
