@@ -70,10 +70,10 @@ app.post('/login.html', urlencodedParser, (req, res) => {
     }
   }
 
-  let responses = {
-    email: req.body.email,
-    playlistParam: req.body.playlistParam
-  };
+  // let responses = {
+  //   email: req.body.email,
+  //   playlistParam: req.body.playlistParam
+  // };
 
   const filePath = path.join(__dirname, '/public/index.html');
   // if (responses.playlistParam != undefined) {
@@ -96,7 +96,6 @@ app.post('/login.html', urlencodedParser, (req, res) => {
   //       },
   //     });
   // }
-
 });
 
 app.put('/login.html', urlencodedParser, (req, res) => {
