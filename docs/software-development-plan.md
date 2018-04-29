@@ -3,7 +3,7 @@
 
 ## 4.1.1 Project Deliverables
 | Deliverable | Description | Due Date |
-|---|---|
+|---|---|---|
 | Project Proposal Document | Summarizes the purpose and functionality of the application. | Week 2 |
 |	Requirements Specification Document (Initial) | Document that specifies all the software and hardware requirements of Music Palace. | Week 5 |
 | Software Development Plan Document (Initial) | Lays out the deliverables for the development of Music Palace, along with their due dates. | Week 9 |
