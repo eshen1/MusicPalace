@@ -182,13 +182,11 @@ input.searchTerm {
 
 .playerInner {
   margin-left: 115px;
-  bottom: 0px
-  width: 350px;
 }
 
 .playerInnerArtwork {
   width: 200px;
-  height: 175px;
+  height: 200px;
   border-style: solid;
   border-width: 7px;
   border-color: #2d3436;

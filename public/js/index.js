@@ -1,4 +1,4 @@
-const ACCESS_TOKEN = 'BQCRJkgO8BW_evfqW51eJ37nqHwrRDaXHQC-CKDTZEvwprYSShGhFwptcYAiQWGCrXCokNVxFBCbuhugXpuWInDzgRbr2JLoaA108N5w770n0LrR_Ij7ipNRM_jxK1THOuOD_HUnSIPnejGIh80KgG_XoTdOKUfC8Xj9pq0vsStI';
+const ACCESS_TOKEN = 'BQDz4UqpZw-PtaBhJHd0W_Kj9CH43T_7fJybf22ngq1tYfh2lNMmQxhjkOZA2dhdo_gW0pDryhs0Of38XXWGIT4EHO2cWf3Uoz89l3QNPqYRTQKpw5I0Yl-47wHrF51pK0ckvCTx3NstjYMYRlBmKAN_s_asqQgufTiihdZTWHjs';
 
 let deviceId = ''
 let playlistContent = {};
@@ -67,8 +67,13 @@ window.onSpotifyWebPlaybackSDKReady = () => {
   $('.play').click(function() {
     player.getCurrentState().then(state => {
       if (state) {
-        player.pause();
-        document.querySelector('.play').innerHTML = 'play_arrow';
+        if (state.paused == true) {
+          document.querySelector('.play').innerHTML = 'pause';
+        }
+        if (state.paused == false) {
+          document.querySelector('.play').innerHTML = 'play_arrow';
+        }
+        player.togglePlay();
         return;
       }
     });
@@ -112,6 +117,10 @@ $('#plus').click(function() {
             },
           });
           document.querySelector('.play').innerHTML = 'pause';
+          console.log($('img', $(this)).attr('src'));
+          document.getElementById('playerIcon').src = $('img', $(this)).attr('src');
+          document.getElementById('playerIcon').style.width = '186px';
+          document.getElementById('playerIcon').style.height = '186px';
         })
         $('.searchresults').append(playlistContent[newName][i]);
       }
@@ -148,7 +157,8 @@ let processResults = function(response) {
   for (let i = 0; (i < 50) && (response.tracks.items[i].uri !== undefined); i++) {
     let result = $('<div/>', {
       id: response.tracks.items[i].uri,
-      'class': 'result'
+      'class': 'result',
+      'imageSrc': response.tracks.items[i].album.images[0].url
     });
 
     let albumIcon = $('<img />',
@@ -177,6 +187,9 @@ let processResults = function(response) {
         },
       });
       document.querySelector('.play').innerHTML = 'pause';
+      document.getElementById('playerIcon').src = response.tracks.items[i].album.images[0].url;
+      document.getElementById('playerIcon').style.width = '186px';
+      document.getElementById('playerIcon').style.height = '186px';
     });
 
     let title = response.tracks.items[i].name;
