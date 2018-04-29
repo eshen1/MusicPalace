@@ -1,10 +1,9 @@
-const ACCESS_TOKEN = 'BQA9B9JV5kD648U2HyArhgXVAZLv9oy8f99npqepzmBkpJIeM7UHP8OmtVwFFBrRIIZX-az1VInquFVX41J6Q4CyaV1CHFT-U2nmWFm_Sovm2op_dofiuv2n3eMWbo9xeBxb5R9cGz-NR9EiKwEY6dnCFAOrb5u3Fwq77WQ65z0S';
+const ACCESS_TOKEN = 'BQAD_Dfn5uB05x1Sdwfj3hXjAT_M9uxRmmTQRT1GdU6GvQVVnzN98Vw8FbhL_ApLXL4kX8c0vNTQ3ldTnneJ7ZTcDXsq4ZPqGh-XyizuexUyG18oRRefBcrh1kJ6Ep7FotFZjaplaN8cT5n5yn3A4-Fg1iDsB2c8knBW3PqvghKX';
 
 let deviceId = ''
 let playlistContent = {};
 let trackUri = '';
 let trackIndex = 0;
-
 
 let checkEmail = (text) => {
   let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -20,15 +19,15 @@ let checkEmail = (text) => {
 }
 
 let checkPass = (text) => {
-    if (text.length <= 5) {
-      let node = document.createElement("div");
-      node.id = 'node';
-      let textnode = document.createTextNode("Password needs to be length of 6 or more");
-      node.appendChild(textnode);
-      document.getElementById("pass").appendChild(node);
-      return false;
-    }
-    return true;
+  if (text.length <= 5) {
+    let node = document.createElement("div");
+    node.id = 'node';
+    let textnode = document.createTextNode("Password needs to be length of 6 or more");
+    node.appendChild(textnode);
+    document.getElementById("pass").appendChild(node);
+    return false;
+  }
+  return true;
 }
 
 $('#buttons').click(function() {
@@ -45,7 +44,6 @@ $('#buttons').click(function() {
   }
 });
 
-
 window.onSpotifyWebPlaybackSDKReady = () => {
   const player = new Spotify.Player({
     name: 'Web Playback SDK Quick Start Player',
@@ -57,7 +55,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
   player.addListener('account_error', ({ message }) => { console.error(message); });
   player.addListener('playback_error', ({ message }) => { console.error(message); });
   // Playback status updates
-  player.addListener('player_state_changed', state => { console.log(state); });
+//  player.addListener('player_state_changed', state => { console.log(state); });
   // Ready
   player.addListener('ready', ({ device_id }) => {
     console.log('Ready with Device ID', device_id);
@@ -80,6 +78,16 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     });
   });
 
+  // play next song when current song has ended
+  player.addListener('player_state_changed', state => {
+    console.log(state);
+    if ((state.position == 0) && (state.paused == true) && (state.restrictions.disallow_pausing_reasons)) {
+      trackIndex++;
+      trackUri = $('.searchresults').children().eq(trackIndex)[0].id;
+      play();
+    }
+  });
+
   $('.next').click(function() {
     trackIndex++;
     trackUri = $('.searchresults').children().eq(trackIndex)[0].id;
@@ -92,6 +100,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     play();
   });
 
+  // api call to play a track
   let play = () => {
     fetch('https://api.spotify.com/v1/me/player/play?device_id=' + deviceId, {
       method: 'PUT',
@@ -103,9 +112,12 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     });
     document.querySelector('.play').innerHTML = 'pause';
     document.getElementById('playerIcon').src = document.getElementById(trackUri).getAttribute('imageSrc');
+    document.querySelector('#playerTitle').innerHTML = document.getElementById(trackUri).getAttribute('trackTitle');
+    document.querySelector('#playerArtist').innerHTML = document.getElementById(trackUri).getAttribute('trackArtist');
+    console.log(document.getElementById(trackUri).getAttribute('trackTitle'));
   }
 
-
+  // prevent default behavior for drag and drop
   $('html').on('dragenter dragleave dragover drop', function (e) {
       e.preventDefault();
       e.stopPropagation();
@@ -151,8 +163,6 @@ window.onSpotifyWebPlaybackSDKReady = () => {
   //     }
   //   </script>
 
-
-
   $('#searchButton').click(function () {
     window.location.href='#Search';
     let searchQuery = document.getElementById('searchTerm').value;
@@ -174,7 +184,9 @@ window.onSpotifyWebPlaybackSDKReady = () => {
       let result = $('<div/>', {
         id: response.tracks.items[i].uri,
         'class': 'result',
-        'imageSrc': response.tracks.items[i].album.images[0].url
+        'imageSrc': response.tracks.items[i].album.images[0].url,
+        'trackTitle': response.tracks.items[i].name,
+        'trackArtist': response.tracks.items[i].artists[0].name
       });
 
       let albumIcon = $('<img />',
