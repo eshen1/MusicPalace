@@ -23,8 +23,9 @@ body, html {
 }
 
 #logo {
-  width: 50%;
-  height: 50%;
+  width: 70%;
+  height: 70%;
+  transform: translate(0%, -15%);
 }
 
 .sidenav a {
@@ -191,6 +192,11 @@ input.searchTerm {
   border-width: 7px;
   border-color: #2d3436;
   background-color: #f5f6fa;
+}
+
+#playerIcon {
+  width: 186px;
+  height: 186px;
 }
 
 .playerControls {

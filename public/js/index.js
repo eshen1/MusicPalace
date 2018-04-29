@@ -1,4 +1,4 @@
-const ACCESS_TOKEN = 'BQCq6OnKgcsy3lcH5FhQ3hMCKvW-L7IaCfMqht3LsBGMSLesUuS2VOOoKFlWCtTOytwazfagNIaZdWls5__tOtXzuB7acUsbRpUgEY3C_zqdFkqB0UBCcjiQD3KnIfyYd8H59oQeuqoiTFATZLpxGGxAgaI0AI408fAg2ymXu-uF';
+const ACCESS_TOKEN = 'BQA9B9JV5kD648U2HyArhgXVAZLv9oy8f99npqepzmBkpJIeM7UHP8OmtVwFFBrRIIZX-az1VInquFVX41J6Q4CyaV1CHFT-U2nmWFm_Sovm2op_dofiuv2n3eMWbo9xeBxb5R9cGz-NR9EiKwEY6dnCFAOrb5u3Fwq77WQ65z0S';
 
 let deviceId = ''
 let playlistContent = {};
@@ -103,8 +103,6 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     });
     document.querySelector('.play').innerHTML = 'pause';
     document.getElementById('playerIcon').src = document.getElementById(trackUri).getAttribute('imageSrc');
-    document.getElementById('playerIcon').style.width = '186px';
-    document.getElementById('playerIcon').style.height = '186px';
   }
 
 
