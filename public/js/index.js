@@ -1,8 +1,9 @@
-const ACCESS_TOKEN = 'BQDz4UqpZw-PtaBhJHd0W_Kj9CH43T_7fJybf22ngq1tYfh2lNMmQxhjkOZA2dhdo_gW0pDryhs0Of38XXWGIT4EHO2cWf3Uoz89l3QNPqYRTQKpw5I0Yl-47wHrF51pK0ckvCTx3NstjYMYRlBmKAN_s_asqQgufTiihdZTWHjs';
+const ACCESS_TOKEN = 'BQCq6OnKgcsy3lcH5FhQ3hMCKvW-L7IaCfMqht3LsBGMSLesUuS2VOOoKFlWCtTOytwazfagNIaZdWls5__tOtXzuB7acUsbRpUgEY3C_zqdFkqB0UBCcjiQD3KnIfyYd8H59oQeuqoiTFATZLpxGGxAgaI0AI408fAg2ymXu-uF';
 
 let deviceId = ''
 let playlistContent = {};
 let trackUri = '';
+let trackIndex = 0;
 
 
 let checkEmail = (text) => {
@@ -78,68 +79,96 @@ window.onSpotifyWebPlaybackSDKReady = () => {
       }
     });
   });
-};
 
-$('html').on('dragenter dragleave dragover drop', function (e) {
-    e.preventDefault();
-    e.stopPropagation();
-});
+  $('.next').click(function() {
+    trackIndex++;
+    trackUri = $('.searchresults').children().eq(trackIndex)[0].id;
+    play();
+  });
 
-$('#plus').click(function() {
-  let newName = prompt('Please enter your music palace Name', 'Music');
-  playlistContent[newName] = [];
-  if (newName != '') {
-    let newPlaylist = $('<div/>', {
-      id: newName,
-      href: '#'+newName,
-      text: newName
-    }).droppable();
+  $('.prev').click(function() {
+    trackIndex--;
+    trackUri = $('.searchresults').children().eq(trackIndex)[0].id;
+    play();
+  });
 
-    $(newPlaylist).on('drop', function(event, ui) {
-      event.preventDefault();
-      event.stopPropagation();
-      alert('added to' + newName);
-      playlistContent[newName].push(ui.draggable);
-//     event.originalEvent.dataTransfer.dropEffect = "copy";
+  let play = () => {
+    fetch('https://api.spotify.com/v1/me/player/play?device_id=' + deviceId, {
+      method: 'PUT',
+      body: JSON.stringify({ uris: [trackUri] }),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + ACCESS_TOKEN
+      },
     });
-
-    newPlaylist.click(function() {
-      $('.searchresults').empty();
-      for (let i = 0; i < playlistContent[newName].length; i++) {
-        playlistContent[newName][i].click(function(){
-          trackUri = playlistContent[newName][i][0].id;
-          fetch('https://api.spotify.com/v1/me/player/play?device_id=' + deviceId, {
-            method: 'PUT',
-            body: JSON.stringify({ uris: [trackUri] }),
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + ACCESS_TOKEN
-            },
-          });
-          document.querySelector('.play').innerHTML = 'pause';
-          console.log($('img', $(this)).attr('src'));
-          document.getElementById('playerIcon').src = $('img', $(this)).attr('src');
-          document.getElementById('playerIcon').style.width = '186px';
-          document.getElementById('playerIcon').style.height = '186px';
-        })
-        $('.searchresults').append(playlistContent[newName][i]);
-      }
-    });
-    $('#playlistNames').append(newPlaylist);
+    document.querySelector('.play').innerHTML = 'pause';
+    document.getElementById('playerIcon').src = document.getElementById(trackUri).getAttribute('imageSrc');
+    document.getElementById('playerIcon').style.width = '186px';
+    document.getElementById('playerIcon').style.height = '186px';
   }
-});
-
-// <script type='text/javascript'>
-//     function showHomePage(homepage){
-//     document.getElementById(homepage).style.display = 'block';
-//     }
-//   </script>
 
 
+  $('html').on('dragenter dragleave dragover drop', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+  });
 
-$('#searchButton').click(function () {
-  window.location.href='#Search';
-  let searchQuery = document.getElementById('searchTerm').value;
+  $('#plus').click(function() {
+    let newName = prompt('Please enter your music palace Name', 'Music');
+    playlistContent[newName] = [];
+    if (newName != '') {
+      let newPlaylist = $('<div/>', {
+        id: newName,
+        href: '#'+newName,
+        text: newName
+      }).droppable();
+
+      $(newPlaylist).on('drop', function(event, ui) {
+        event.preventDefault();
+        event.stopPropagation();
+        alert('added to' + newName);
+        playlistContent[newName].push(ui.draggable);
+  //     event.originalEvent.dataTransfer.dropEffect = "copy";
+      });
+
+      newPlaylist.click(function() {
+        $('.searchresults').empty();
+        for (let i = 0; i < playlistContent[newName].length; i++) {
+          playlistContent[newName][i].click(function(){
+            trackUri = playlistContent[newName][i][0].id;
+            fetch('https://api.spotify.com/v1/me/player/play?device_id=' + deviceId, {
+              method: 'PUT',
+              body: JSON.stringify({ uris: [trackUri] }),
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + ACCESS_TOKEN
+              },
+            });
+            document.querySelector('.play').innerHTML = 'pause';
+            trackIndex = $(this).index();
+            console.log(trackIndex);
+            document.getElementById('playerIcon').src = $('img', $(this)).attr('src');
+            document.getElementById('playerIcon').style.width = '186px';
+            document.getElementById('playerIcon').style.height = '186px';
+          });
+          $('.searchresults').append(playlistContent[newName][i]);
+        }
+      });
+      $('#playlistNames').append(newPlaylist);
+    }
+  });
+
+  // <script type='text/javascript'>
+  //     function showHomePage(homepage){
+  //     document.getElementById(homepage).style.display = 'block';
+  //     }
+  //   </script>
+
+
+
+  $('#searchButton').click(function () {
+    window.location.href='#Search';
+    let searchQuery = document.getElementById('searchTerm').value;
     $.ajax({
       type: 'GET',
       url: 'https://api.spotify.com/v1/search?q=' + searchQuery + '&type=track&market=us&limit=50&offset=5',
@@ -150,61 +179,63 @@ $('#searchButton').click(function () {
         processResults(response);
       }
     });
-});
+  });
 
-let processResults = function(response) {
-  $('.searchresults').empty();
-  for (let i = 0; (i < 50) && (response.tracks.items[i].uri !== undefined); i++) {
-    let result = $('<div/>', {
-      id: response.tracks.items[i].uri,
-      'class': 'result',
-      'imageSrc': response.tracks.items[i].album.images[0].url
-    });
-
-    let albumIcon = $('<img />',
-      { 'class': 'songIcon',
+  let processResults = function(response) {
+    $('.searchresults').empty();
+    for (let i = 0; (i < 50) && (response.tracks.items[i].uri !== undefined); i++) {
+      let result = $('<div/>', {
         id: response.tracks.items[i].uri,
-        src: response.tracks.items[i].album.images[0].url,
-        width: '150px',
-        height: '150px'
-    });
-
-    let $playButton = $('<i/>',
-      { 'class': 'fa fa-play-circle-o',
-        id: 'playButton'
+        'class': 'result',
+        'imageSrc': response.tracks.items[i].album.images[0].url
       });
 
-    let $iconContainer = $('<div/>',
-    { 'class': 'albumIconContainer'
-    }).append(albumIcon).append($playButton).click(function(){
-      trackUri = response.tracks.items[i].uri;
-      fetch('https://api.spotify.com/v1/me/player/play?device_id=' + deviceId, {
-        method: 'PUT',
-        body: JSON.stringify({ uris: [trackUri] }),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + ACCESS_TOKEN
-        },
+      let albumIcon = $('<img />',
+        { 'class': 'songIcon',
+          id: response.tracks.items[i].uri,
+          src: response.tracks.items[i].album.images[0].url,
+          width: '150px',
+          height: '150px'
       });
-      document.querySelector('.play').innerHTML = 'pause';
-      document.getElementById('playerIcon').src = response.tracks.items[i].album.images[0].url;
-      document.getElementById('playerIcon').style.width = '186px';
-      document.getElementById('playerIcon').style.height = '186px';
-    });
 
-    let title = response.tracks.items[i].name;
-    let artist = response.tracks.items[i].artists[0].name;
-    let album = response.tracks.items[i].album.name;
-    let songInfo = $('<ul/>',
-      { 'class': 'songInfo'
-    }).append($('<li id=title>'+ title +'<li/>')).append($('<li id=artist>'+' Artist: ' + artist +'<li/>')).append($('<li id=album>'+'Album: ' + album+'<li/>'));
+      let $playButton = $('<i/>',
+        { 'class': 'fa fa-play-circle-o',
+          id: 'playButton'
+        });
 
-    result.append($iconContainer).append(songInfo);
-    result.draggable({
-      revert: true
-    });
-    $('.searchresults').append(result);
-    // $('.searchresults').append('<br>');
-  }
+      let $iconContainer = $('<div/>',
+      { 'class': 'albumIconContainer'
+      }).append(albumIcon).append($playButton).click(function(){
+        trackUri = response.tracks.items[i].uri;
+        fetch('https://api.spotify.com/v1/me/player/play?device_id=' + deviceId, {
+          method: 'PUT',
+          body: JSON.stringify({ uris: [trackUri] }),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + ACCESS_TOKEN
+          },
+        });
+        // trackIndex = $(this).index();
+        // console.log($(this));
+        document.querySelector('.play').innerHTML = 'pause';
+        document.getElementById('playerIcon').src = response.tracks.items[i].album.images[0].url;
+        document.getElementById('playerIcon').style.width = '186px';
+        document.getElementById('playerIcon').style.height = '186px';
+      });
 
+      let title = response.tracks.items[i].name;
+      let artist = response.tracks.items[i].artists[0].name;
+      let album = response.tracks.items[i].album.name;
+      let songInfo = $('<ul/>',
+        { 'class': 'songInfo'
+      }).append($('<li id=title>'+ title +'<li/>')).append($('<li id=artist>'+' Artist: ' + artist +'<li/>')).append($('<li id=album>'+'Album: ' + album+'<li/>'));
+
+      result.append($iconContainer).append(songInfo);
+      result.draggable({
+        revert: true
+      });
+      $('.searchresults').append(result);
+      // $('.searchresults').append('<br>');
+    }
+  };
 };
