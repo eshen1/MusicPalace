@@ -1,0 +1,1 @@
+This week was a heavy one we now have full user implementation, but we took a hit and will probably not be able to implement playlist integration to our database, but it a user can make a playlist, but just can't log out otherwise they lose their playlist so its an all or nothing. We also did testing and cleaned up our UI some more and finished our poster. 

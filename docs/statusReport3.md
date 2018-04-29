@@ -1,0 +1,1 @@
+This week we had to take care of clean up and begin running our server which caused a little bit of trouble when merging because we changed to layout of the project and it wouldn't allow us to push to the master branch. We also did some UI clean up.  
