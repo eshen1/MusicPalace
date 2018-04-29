@@ -70,13 +70,12 @@ app.post('/login.html', urlencodedParser, (req, res) => {
     }
   }
 
-  let responses = {
-    email: req.body.email,
-    playlistParam: req.body.playlistParam
-  };
+  // let responses = {
+  //   email: req.body.email,
+  //   playlistParam: req.body.playlistParam
+  // };
 
   const filePath = path.join(__dirname, '/public/index.html');
-  res.sendFile(filePath);
   // if (responses.playlistParam != undefined) {
   //   console.log("Do I get called?");
   //   console.log(response);
