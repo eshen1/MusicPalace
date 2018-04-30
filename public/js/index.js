@@ -1,46 +1,47 @@
-const ACCESS_TOKEN = 'BQAD_Dfn5uB05x1Sdwfj3hXjAT_M9uxRmmTQRT1GdU6GvQVVnzN98Vw8FbhL_ApLXL4kX8c0vNTQ3ldTnneJ7ZTcDXsq4ZPqGh-XyizuexUyG18oRRefBcrh1kJ6Ep7FotFZjaplaN8cT5n5yn3A4-Fg1iDsB2c8knBW3PqvghKX';
+const ACCESS_TOKEN = 'BQCmHBB12klakLwcGLvJJE4iqIG_Azp0RLs0bLMIT7k02NULiz4B7mwl28zZHJBsiG-fj2NtOa4jWRlH7jKkxBGBHGDZhDrEK0CRsMI0JDDaUP8kxhj9Ou_bbI2Wm7sHByijhxYqhBCNy-__TyLejiwqJXujUkj_wz9giyyFFxXf';
 
-let deviceId = ''
-let playlistContent = {};
+let deviceId = '';
+const playlistContent = {};
 let trackUri = '';
 let trackIndex = 0;
 
-let checkEmail = (text) => {
-  let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  if(re.test(text) === false) {
-    let node = document.createElement("div");
+const checkEmail = (text) => {
+  const re = /^(([^<>()[\]\\.,;:\s@\']+(\.[^<>()[\]\\.,;:\s@\']+)*)|(\'.+\'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (re.test(text) === false) {
+    const node = document.createElement('div');
     node.id = 'node';
-    let textnode = document.createTextNode("Invalid email");
+    const textnode = document.createTextNode('Invalid email');
     node.appendChild(textnode);
-    document.getElementById("pass").appendChild(node);
+    document.getElementById('pass').appendChild(node);
     return false;
   }
   return true;
-}
+};
 
-let checkPass = (text) => {
+const checkPass = (text) => {
   if (text.length <= 5) {
-    let node = document.createElement("div");
+    const node = document.createElement('div');
     node.id = 'node';
-    let textnode = document.createTextNode("Password needs to be length of 6 or more");
+    const textnode = document.createTextNode('Password needs to be length of 6 or more');
     node.appendChild(textnode);
-    document.getElementById("pass").appendChild(node);
+    document.getElementById('pass').appendChild(node);
     return false;
   }
   return true;
-}
+};
 
-$('#buttons').click(function() {
-  if(document.getElementById('pass').childNodes.length > 3) {
+$('#buttons').click(() => {
+  if (document.getElementById('pass').childNodes.length > 3) {
     document.getElementById('pass').removeChild(document.getElementById('pass').childNodes[3]);
   }
-  if(checkEmail(document.getElementById('email').value)){
+  if (checkEmail(document.getElementById('email').value)) {
     if (checkPass(document.getElementById('passw').value)) {
-      let node = document.createElement("div");
+      const node = document.createElement('div');
       node.id = 'node';
-      let textnode = document.createTextNode("Registered");
+      const textnode = document.createTextNode('Registered');
       node.appendChild(textnode);
-      document.getElementById("pass").appendChild(node);    }
+      document.getElementById('pass').appendChild(node);
+    }
   }
 });
 
@@ -63,13 +64,13 @@ window.onSpotifyWebPlaybackSDKReady = () => {
   });
   // Connect to the player!
   player.connect();
-  $('.play').click(function() {
-    player.getCurrentState().then(state => {
+  $('.play').click(() => {
+    player.getCurrentState().then((state) => {
       if (state) {
-        if (state.paused == true) {
+        if (state.paused === true) {
           document.querySelector('.play').innerHTML = 'pause';
         }
-        if (state.paused == false) {
+        if (state.paused === false) {
           document.querySelector('.play').innerHTML = 'play_arrow';
         }
         player.togglePlay();
@@ -79,10 +80,11 @@ window.onSpotifyWebPlaybackSDKReady = () => {
   });
 
   // play next song when current song has ended
-  player.addListener('player_state_changed', state => {
+  player.addListener('player_state_changed', (state) => {
     console.log(state);
-    if ((state.position == 0) && (state.paused == true) && (state.restrictions.disallow_pausing_reasons)) {
-      trackIndex++;
+    if ((state.position === 0) && (state.paused === true)
+    && (state.restrictions.disallow_pausing_reasons)) {
+      trackIndex += 1;
       trackUri = $('.searchresults').children().eq(trackIndex)[0].id;
       play();
     }
@@ -138,7 +140,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
         event.stopPropagation();
         alert('added to' + newName);
         playlistContent[newName].push(ui.draggable);
-  //     event.originalEvent.dataTransfer.dropEffect = "copy";
+  //     event.originalEvent.dataTransfer.dropEffect = 'copy';
       });
 
       newPlaylist.click(function() {

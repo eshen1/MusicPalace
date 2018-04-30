@@ -11,7 +11,6 @@ const session = driver.session();
 
 const query = 'MERGE (user:User { email:{emailParam} , password: {passwordParam} } )';
 const query2 = 'Match (n:User) WHERE n.email = {emailParam} and n.password = {passwordParam} return n';
-const query3 = 'MATCH (n:User) WHERE n.email = "hello" SET n.playlist = {playlistParam}';
 let response = {};
 
 // Create application/x-www-form-urlencoded parser
@@ -19,22 +18,22 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 app.use(express.static('public'));
 
-let checkEmail = (text) => {
-  let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  if(re.test(text) === false) {
+const checkEmail = (text) => {
+  const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (re.test(text) === false) {
     return false;
   }
   return true;
-}
+};
 
-let checkPass = (text) => {
-    if (text.length <= 5) {
-      return false;
-    }
-    return true;
-}
+const checkPass = (text) => {
+  if (text.length <= 5) {
+    return false;
+  }
+  return true;
+};
 
-let checkUser = (params) => {
+const checkUser = (params) => {
   console.log(params);
   let imBad = false;
   session
@@ -74,7 +73,7 @@ app.post('/homepage.html', urlencodedParser, (req, res) => {
   };
   if (checkEmail(response.email)) {
     if (checkPass(response.password)) {
-      if (response.email != undefined && response.password != undefined) {
+      if (response.email !== undefined && response.password !== undefined) {
         session
           .run(query, { emailParam: response.email, passwordParam: response.password })
           .subscribe({
@@ -96,41 +95,8 @@ app.post('/homepage.html', urlencodedParser, (req, res) => {
       }
     }
   }
-
-  // let responses = {
-  //   email: req.body.email,
-  //   playlistParam: req.body.playlistParam
-  // };
-
-  const filePath = path.join(__dirname, '/public/index.html');
-  // if (responses.playlistParam != undefined) {
-  //   console.log("Do I get called?");
-  //   console.log(response);
-  //   console.log(responses.email + " response.email");
-  //   console.log(responses.playlistParam + " playlist");
-  //
-  //   session
-  //     .run(query2, { playlistParam: responses.playlistParam })
-  //     .subscribe({
-  //       onNext: (record) => {
-  //         console.log(record.get('name'));
-  //       },
-  //       onCompleted: () => {
-  //         session.close();
-  //       },
-  //       onError: (error) => {
-  //         console.log(error);
-  //       },
-  //     });
-  // }
 });
 
-app.put('/homepage.html', urlencodedParser, (req, res) => {
-  // Prepare output in JSON format
-
-  console.log(response);
-  res.sendFile(filePath);
-});
 
 app.listen(3000, () => {
   console.log('Listening on', 3000);
