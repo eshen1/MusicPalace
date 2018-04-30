@@ -1,4 +1,4 @@
-const ACCESS_TOKEN = 'BQCmHBB12klakLwcGLvJJE4iqIG_Azp0RLs0bLMIT7k02NULiz4B7mwl28zZHJBsiG-fj2NtOa4jWRlH7jKkxBGBHGDZhDrEK0CRsMI0JDDaUP8kxhj9Ou_bbI2Wm7sHByijhxYqhBCNy-__TyLejiwqJXujUkj_wz9giyyFFxXf';
+const ACCESS_TOKEN = 'BQAEFTd8txfdoBp7jDlDH5KRrkafZsU5kUKqy66rh8v3obKpZYTKZG0A9t0HdtBddiriX_3Q2xWeSnjRqdo7R0YmnT_u2OUkuM2fCE6XcCLAnNJfACOTB0EC8TxmmjNDqow5hpWObvO0Br0_Hb8QDAgMLYxjjciKsIxpLwyxz_dY';
 
 let deviceId = '';
 const playlistContent = {};
@@ -74,14 +74,12 @@ window.onSpotifyWebPlaybackSDKReady = () => {
           document.querySelector('.play').innerHTML = 'play_arrow';
         }
         player.togglePlay();
-        return;
       }
     });
   });
 
   // play next song when current song has ended
   player.addListener('player_state_changed', (state) => {
-    console.log(state);
     if ((state.position === 0) && (state.paused === true)
     && (state.restrictions.disallow_pausing_reasons)) {
       trackIndex += 1;
@@ -93,7 +91,23 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     }
   });
 
-  $('.next').click(function() {
+  // api call to play a track
+  let play = () => {
+    fetch('https://api.spotify.com/v1/me/player/play?device_id=' + deviceId, {
+      method: 'PUT',
+      body: JSON.stringify({ uris: [trackUri] }),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + ACCESS_TOKEN
+      },
+    });
+    document.querySelector('.play').innerHTML = 'pause';
+    document.getElementById('playerIcon').src = document.getElementById(trackUri).getAttribute('imageSrc');
+    document.querySelector('#playerTitle').innerHTML = document.getElementById(trackUri).getAttribute('trackTitle');
+    document.querySelector('#playerArtist').innerHTML = document.getElementById(trackUri).getAttribute('trackArtist');
+  }
+
+  $('.next').click(() => {
     trackIndex += 1;
     if (trackIndex >= $('.searchresults').children().length) {
       trackIndex = 0;
@@ -102,8 +116,8 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     play();
   });
 
-  $('.prev').click(function() {
-    trackIndex--;
+  $('.prev').click(() => {
+    trackIndex -= 1;
     if (trackIndex < 0) {
       trackIndex = $('.searchresults').children().length - 1;
     }
@@ -111,52 +125,35 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     play();
   });
 
-  // api call to play a track
-  let play = () => {
-    fetch('https://api.spotify.com/v1/me/player/play?device_id=' + deviceId, {
-      method: 'PUT',
-      body: JSON.stringify({ uris: [trackUri] }),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + ACCESS_TOKEN
-      },
-    });
-    document.querySelector('.play').innerHTML = 'pause';
-    document.getElementById('playerIcon').src = document.getElementById(trackUri).getAttribute('imageSrc');
-    document.querySelector('#playerTitle').innerHTML = document.getElementById(trackUri).getAttribute('trackTitle');
-    document.querySelector('#playerArtist').innerHTML = document.getElementById(trackUri).getAttribute('trackArtist');
-    console.log(document.getElementById(trackUri).getAttribute('trackTitle'));
-  }
 
   // prevent default behavior for drag and drop
-  $('html').on('dragenter dragleave dragover drop', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
+  $('html').on('dragenter dragleave dragover drop', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
   });
 
-  $('#plus').click(function() {
-    let newName = prompt('Please enter your music palace Name', 'Music');
+  $('#plus').click(() => {
+    const newName = prompt('Please enter your music palace Name', 'Music');
     playlistContent[newName] = [];
-    if (newName != '') {
-      let newPlaylist = $('<div/>', {
+    if (newName !== '') {
+      const newPlaylist = $('<div/>', {
         id: newName,
-        href: '#'+newName,
+        href: `#${newName}`,
         text: newName,
-        css: { 'height': '50px'}
+        css: { height: '50px'}
       }).droppable();
 
-      $(newPlaylist).on('drop', function(event, ui) {
+      $(newPlaylist).on('drop', (event, ui) => {
         event.preventDefault();
         event.stopPropagation();
-        alert('added to' + newName);
+        alert(`added to${newName}`);
         playlistContent[newName].push(ui.draggable);
-  //     event.originalEvent.dataTransfer.dropEffect = 'copy';
       });
 
-      newPlaylist.click(function() {
+      newPlaylist.click(() => {
         $('.searchresults').empty();
         for (let i = 0; i < playlistContent[newName].length; i++) {
-          playlistContent[newName][i].click(function(){
+          playlistContent[newName][i].click(() => {
             trackUri = playlistContent[newName][i][0].id;
             trackIndex = $(this).index();
             console.log(trackIndex);
@@ -175,66 +172,75 @@ window.onSpotifyWebPlaybackSDKReady = () => {
   //     }
   //   </script>
 
-  $('#searchButton').click(function () {
-    window.location.href='#Search';
-    let searchQuery = document.getElementById('searchTerm').value;
+  $('#searchButton').click(() => {
+    window.location.href = '#Search';
+    const searchQuery = document.getElementById('searchTerm').value;
     $.ajax({
       type: 'GET',
-      url: 'https://api.spotify.com/v1/search?q=' + searchQuery + '&type=track&market=us&limit=50&offset=5',
+      url: `https://api.spotify.com/v1/search?q=${searchQuery}&type=track&market=us&limit=50&offset=5`,
       headers: {
-        'Authorization': 'Bearer ' + ACCESS_TOKEN
+        Authorization: 'Bearer ' + ACCESS_TOKEN
       },
-      success: function (response) {
+      success (response) {
         processResults(response);
       }
     });
   });
 
-  let processResults = function(response) {
+  let processResults = (response) => {
     $('.searchresults').empty();
     for (let i = 0; (i < 50) && (response.tracks.items[i].uri !== undefined); i++) {
-      let result = $('<div/>', {
+      const result = $('<div/>', {
         id: response.tracks.items[i].uri,
-        'class': 'result',
-        'imageSrc': response.tracks.items[i].album.images[0].url,
-        'trackTitle': response.tracks.items[i].name,
-        'trackArtist': response.tracks.items[i].artists[0].name
+        class: 'result',
+        imageSrc: response.tracks.items[i].album.images[0].url,
+        trackTitle: response.tracks.items[i].name,
+        trackArtist: response.tracks.items[i].artists[0].name
       });
 
-      let albumIcon = $('<img />',
-        { 'class': 'songIcon',
+      const albumIcon = $(
+        '<img />',
+        {
+          class: 'songIcon',
           id: response.tracks.items[i].uri,
           src: response.tracks.items[i].album.images[0].url,
           width: '150px',
           height: '150px'
-      });
+        }
+      );
 
-      let $playButton = $('<i/>',
-        { 'class': 'fa fa-play-circle-o',
+      const $playButton = $(
+        '<i/>',
+        {
+          class: 'fa fa-play-circle-o',
           id: 'playButton'
-        });
+        }
+      );
 
-      let $iconContainer = $('<div/>',
-      { 'class': 'albumIconContainer'
-      }).append(albumIcon).append($playButton).click(function(){
+      const $iconContainer = $(
+        '<div/>',
+        {
+          class: 'albumIconContainer'
+        }
+      ).append(albumIcon).append($playButton).click(() => {
         trackUri = response.tracks.items[i].uri;
         trackIndex = i;
         play();
       });
 
-      let title = response.tracks.items[i].name;
-      let artist = response.tracks.items[i].artists[0].name;
-      let album = response.tracks.items[i].album.name;
-      let songInfo = $('<ul/>',
-        { 'class': 'songInfo'
-      }).append($('<li id=title>'+ title +'<li/>')).append($('<li id=artist>'+' Artist: ' + artist +'<li/>')).append($('<li id=album>'+'Album: ' + album+'<li/>'));
+      const title = response.tracks.items[i].name;
+      const artist = response.tracks.items[i].artists[0].name;
+      const album = response.tracks.items[i].album.name;
+      const songInfo = $(
+        '<ul/>',
+        { class: 'songInfo' }
+      ).append($(`<li id=title>${title}<li/>`)).append($(`${'<li id=artist>' + 'Artist: '}${artist}<li/>`)).append($(`${'<li id=album>' + 'Album: '}${album}<li/>`));
 
       result.append($iconContainer).append(songInfo);
       result.draggable({
         revert: true
       });
       $('.searchresults').append(result);
-      // $('.searchresults').append('<br>');
     }
   };
 };
