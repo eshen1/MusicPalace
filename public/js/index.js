@@ -1,4 +1,4 @@
-const ACCESS_TOKEN = 'BQAD_Dfn5uB05x1Sdwfj3hXjAT_M9uxRmmTQRT1GdU6GvQVVnzN98Vw8FbhL_ApLXL4kX8c0vNTQ3ldTnneJ7ZTcDXsq4ZPqGh-XyizuexUyG18oRRefBcrh1kJ6Ep7FotFZjaplaN8cT5n5yn3A4-Fg1iDsB2c8knBW3PqvghKX';
+const ACCESS_TOKEN = 'BQAWzjImyaY2PCKXRYdVDhHvhUVd0JCJrD9FdbhzMN-F98SVLLODUqNm8DUipNRDItHL6bnV5T9Nkhn0CPK8VH4Mweb20ZweZIk4c-l379QjZDlDZuhU1hTl-I09qTbzzjO32tTc4xw3cjftU3nfCQrFYZjbf2yRlkiET7bDDuFx';
 
 let deviceId = ''
 let playlistContent = {};
@@ -130,7 +130,8 @@ window.onSpotifyWebPlaybackSDKReady = () => {
       let newPlaylist = $('<div/>', {
         id: newName,
         href: '#'+newName,
-        text: newName
+        text: newName,
+        css: { 'height': '50px'}
       }).droppable();
 
       $(newPlaylist).on('drop', function(event, ui) {

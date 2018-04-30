@@ -1,0 +1,264 @@
+#all {
+  background-color: #dfe6e9;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.sidenav {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    box-shadow: 4px 0 5px 0 grey;
+    text-shadow: 1px 1px 1px #2d3436;
+    background-color: #b2bec3;
+    overflow-x: hidden;
+    padding-top: 10px;
+}
+
+#logo {
+  width: 70%;
+  height: 70%;
+  transform: translate(0%, -15%);
+}
+
+.sidenav a {
+    font-size: 20px;
+    color: #6c5ce7;
+}
+
+#plus {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    display: block;
+    text-align: center;
+    color: #6c5ce7;
+}
+
+#playlistNames {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  display: block;
+  text-align: center;
+  color: #6c5ce7;
+}
+
+#search {
+  margin-left: 160px;
+  height: 60px;
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  display: block;
+  box-shadow: 4px 0 5px 0 grey;
+  text-shadow: 1px 1px 1px #2d3436;
+  background-color: #b2bec3;
+}
+
+#searchButton {
+  height: 40px;
+  box-shadow: 4px 0 5px 0 grey;
+  text-shadow: 1px 1px 1px #2d3436;
+  color: #6c5ce7;
+}
+#logout {
+  height: 40px;
+  box-shadow: 4px 0 5px 0 grey;
+  text-shadow: 1px 1px 1px #2d3436;
+  color: #6c5ce7;
+}
+.sidenav a:hover, .sidenav div:hover, #plus:hover {
+    color: #f1f1f1;
+}
+
+#logout:hover, #searchButton:hover {
+  color: #b2bec3;
+}
+
+.searchTerm::placeholder {
+  text-shadow: none;
+  color: #2d3436;
+}
+
+input.searchTerm {
+  font-family: Verdana, Geneva, sans-serif;
+  border: 1px solid transparent;
+  box-shadow: 4px 0 5px 0 grey;
+  margin: auto;
+  text-shadow: 1px 1px 1px #2d3436;
+  color: #ff7675;
+  background: #dfe6e9;
+}
+
+#logout {
+  float: right;
+  float: top;
+}
+
+.searchresults {
+  margin-left: 165px;
+  height: 100%;
+  width: 100%;
+  background-color: #dfe6e9;
+  color: #2d3436;
+  display: grid;
+  grid-template-columns: 100px 100px 100px 100px 100px 100px 100px;
+  grid-template-rows: 150px 150px 150px 150px 150px;
+  grid-gap: 90px;
+  text-align: center;
+  position: relative;
+}
+
+.result {
+  width: 200px;
+  height: 200px;
+  position: relative;
+}
+
+.albumIconContainer {
+  width: 150px;
+  height: 150px;
+  position: relative;
+}
+
+.songIcon {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  opacity : 1;
+  transition: .5s ease;
+}
+
+#playButton {
+  font-size: 75px;
+  color: #2d3436;
+  background: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  transition: .5s ease;
+  opacity: 0;
+}
+
+.albumIconContainer:hover .songIcon {
+  opacity: 0.3;
+}
+
+.albumIconContainer:hover #playButton {
+  opacity: 1;
+}
+
+.songInfo {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 12px;
+  list-style-type: none;
+  transform: translateX(-50px);
+}
+
+#title {
+  font-weight: bold;
+}
+
+#main {
+    /* margin-left: 160px; /* Same as the width of the sidebar */
+    height: 100%;
+    width: 100%;
+}
+
+.player {
+  position: fixed;
+  bottom: 0px;
+  z-index: 1;
+}
+
+.playerInner {
+  margin-left: 115px;
+}
+
+.playerInnerArtwork {
+  width: 200px;
+  height: 200px;
+  border-style: solid;
+  border-width: 7px;
+  border-color: #2d3436;
+  background-color: #f5f6fa;
+  position: relative;
+}
+
+#playerIcon {
+  width: 186px;
+  height: 186px;
+}
+
+.playerControls {
+   height: 48px;
+   width: 300px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   transform: translateY(-55%);
+   text-shadow: 2px 2px 2px #2d3436;
+ }
+
+#playerSongInfo {
+  position: absolute;
+  top: 4px;
+  left: 0px;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 12px;
+  list-style-type: none;
+  transform: translateX(-35px);
+}
+
+#playerTitle {
+  font-weight: bold;
+  font-size: 14px;
+  background-color: rgba(45, 52, 54, 0.85);
+  color: rgba(255, 255, 255,1.0)
+}
+
+#playerArtist {
+  background-color: rgba(45, 52, 54, 0.85);
+  color: rgba(255, 255, 255,1.0)
+}
+
+ .material-icons:hover {
+   border-style: solid;
+   color: #6c5ce7;
+   background: #dfe6e9;
+ }
+
+i {
+   color: #FFF;
+   background: #6c5ce7;
+   border-radius: 100%;
+   font-size: 16px;
+   padding: 8px;
+   margin: auto 4px;
+   cursor: pointer;
+ }
+
+#label {
+  text-align: center;
+  padding: 5px;
+  font-family: Verdana, Geneva, sans-serif;
+  box-shadow: 4px 0 5px 0 grey;
+  text-shadow: 1px 1px 1px red;
+  color: #6accc5;
+  background-color: #312e2e;
+}
+
+#user, #pass, #buttons {
+  text-align: center;
+  padding: 5px;
+}
