@@ -85,19 +85,28 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     if ((state.position === 0) && (state.paused === true)
     && (state.restrictions.disallow_pausing_reasons)) {
       trackIndex += 1;
+      if (trackIndex >= $('.searchresults').children().length) {
+        trackIndex = 0;
+      }
       trackUri = $('.searchresults').children().eq(trackIndex)[0].id;
       play();
     }
   });
 
   $('.next').click(function() {
-    trackIndex++;
+    trackIndex += 1;
+    if (trackIndex >= $('.searchresults').children().length) {
+      trackIndex = 0;
+    }
     trackUri = $('.searchresults').children().eq(trackIndex)[0].id;
     play();
   });
 
   $('.prev').click(function() {
     trackIndex--;
+    if (trackIndex < 0) {
+      trackIndex = $('.searchresults').children().length - 1;
+    }
     trackUri = $('.searchresults').children().eq(trackIndex)[0].id;
     play();
   });
