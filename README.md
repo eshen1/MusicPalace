@@ -4,7 +4,8 @@ To be able to start the application </p>
 
 1. First clone the repository
 2. Download Neo4j Desktop https://neo4j.com/download/
-3. Once downloaded open up and run the database
+3. Once downloaded open up and create a local database and run it by clicking the
+play button
 4. Run npm install
 5. Run npm start
 6. Go to localhost:3000
