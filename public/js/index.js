@@ -31,6 +31,7 @@ const checkPass = (text) => {
 };
 
 $('#buttons').click(() => {
+  console.log(document.getElementById('pass').childNodes.length);
   if (document.getElementById('pass').childNodes.length > 3) {
     document.getElementById('pass').removeChild(document.getElementById('pass').childNodes[3]);
   }
