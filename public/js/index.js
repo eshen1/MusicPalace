@@ -156,7 +156,6 @@ window.onSpotifyWebPlaybackSDKReady = () => {
           playlistContent[newName][i].click(() => {
             trackUri = playlistContent[newName][i][0].id;
             trackIndex = $(this).index();
-            console.log(trackIndex);
             play();
           });
           $('.searchresults').append(playlistContent[newName][i]);
