@@ -78,6 +78,21 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     });
   });
 
+  // api call to play a track
+  const play = () => {
+    fetch(`https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`, {
+      method: 'PUT',
+      body: JSON.stringify({ uris: [trackUri] }),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+      },
+    });
+    document.querySelector('.play').innerHTML = 'pause';
+    document.getElementById('playerIcon').src = document.getElementById(trackUri).getAttribute('imageSrc');
+    document.querySelector('#playerTitle').innerHTML = document.getElementById(trackUri).getAttribute('trackTitle');
+    document.querySelector('#playerArtist').innerHTML = document.getElementById(trackUri).getAttribute('trackArtist');
+  };
   // play next song when current song has ended
   player.addListener('player_state_changed', (state) => {
     if ((state.position === 0) && (state.paused === true)
@@ -90,22 +105,6 @@ window.onSpotifyWebPlaybackSDKReady = () => {
       play();
     }
   });
-
-  // api call to play a track
-  let play = () => {
-    fetch('https://api.spotify.com/v1/me/player/play?device_id=' + deviceId, {
-      method: 'PUT',
-      body: JSON.stringify({ uris: [trackUri] }),
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + ACCESS_TOKEN
-      },
-    });
-    document.querySelector('.play').innerHTML = 'pause';
-    document.getElementById('playerIcon').src = document.getElementById(trackUri).getAttribute('imageSrc');
-    document.querySelector('#playerTitle').innerHTML = document.getElementById(trackUri).getAttribute('trackTitle');
-    document.querySelector('#playerArtist').innerHTML = document.getElementById(trackUri).getAttribute('trackArtist');
-  }
 
   $('.next').click(() => {
     trackIndex += 1;
@@ -140,7 +139,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
         id: newName,
         href: `#${newName}`,
         text: newName,
-        css: { height: '50px'}
+        css: { height: '50px' },
       }).droppable();
 
       $(newPlaylist).on('drop', (event, ui) => {
@@ -165,36 +164,15 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     }
   });
 
-  // <script type='text/javascript'>
-  //     function showHomePage(homepage){
-  //     document.getElementById(homepage).style.display = 'block';
-  //     }
-  //   </script>
-
-  $('#searchButton').click(() => {
-    window.location.href = '#Search';
-    const searchQuery = document.getElementById('searchTerm').value;
-    $.ajax({
-      type: 'GET',
-      url: `https://api.spotify.com/v1/search?q=${searchQuery}&type=track&market=us&limit=50&offset=5`,
-      headers: {
-        Authorization: 'Bearer ' + ACCESS_TOKEN
-      },
-      success (response) {
-        processResults(response);
-      }
-    });
-  });
-
-  let processResults = (response) => {
+  const processResults = (response) => {
     $('.searchresults').empty();
-    for (let i = 0; (i < 50) && (response.tracks.items[i].uri !== undefined); i++) {
+    for (let i = 0; (i < 50) && (response.tracks.items[i].uri !== undefined); i += 1) {
       const result = $('<div/>', {
         id: response.tracks.items[i].uri,
         class: 'result',
         imageSrc: response.tracks.items[i].album.images[0].url,
         trackTitle: response.tracks.items[i].name,
-        trackArtist: response.tracks.items[i].artists[0].name
+        trackArtist: response.tracks.items[i].artists[0].name,
       });
 
       const albumIcon = $(
@@ -204,23 +182,23 @@ window.onSpotifyWebPlaybackSDKReady = () => {
           id: response.tracks.items[i].uri,
           src: response.tracks.items[i].album.images[0].url,
           width: '150px',
-          height: '150px'
-        }
+          height: '150px',
+        },
       );
 
       const $playButton = $(
         '<i/>',
         {
           class: 'fa fa-play-circle-o',
-          id: 'playButton'
-        }
+          id: 'playButton',
+        },
       );
 
       const $iconContainer = $(
         '<div/>',
         {
-          class: 'albumIconContainer'
-        }
+          class: 'albumIconContainer',
+        },
       ).append(albumIcon).append($playButton).click(() => {
         trackUri = response.tracks.items[i].uri;
         trackIndex = i;
@@ -232,14 +210,28 @@ window.onSpotifyWebPlaybackSDKReady = () => {
       const album = response.tracks.items[i].album.name;
       const songInfo = $(
         '<ul/>',
-        { class: 'songInfo' }
+        { class: 'songInfo' },
       ).append($(`<li id=title>${title}<li/>`)).append($(`${'<li id=artist>' + 'Artist: '}${artist}<li/>`)).append($(`${'<li id=album>' + 'Album: '}${album}<li/>`));
 
       result.append($iconContainer).append(songInfo);
       result.draggable({
-        revert: true
+        revert: true,
       });
       $('.searchresults').append(result);
     }
   };
+  $('#searchButton').click(() => {
+    window.location.href = '#Search';
+    const searchQuery = document.getElementById('searchTerm').value;
+    $.ajax({
+      type: 'GET',
+      url: `https://api.spotify.com/v1/search?q=${searchQuery}&type=track&market=us&limit=50&offset=5`,
+      headers: {
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+      },
+      success(response) {
+        processResults(response);
+      },
+    });
+  });
 };
