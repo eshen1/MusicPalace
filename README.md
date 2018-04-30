@@ -14,4 +14,4 @@ play button
 8. Once registered login and the user may begin their music experience.
 9. To make a playlist click the + button and a pop will ask for the users name for the playlist
 10. Once a playlist is made a user may search for a song and drag said song to the playlist
-11. Once a user clicks a song it plays and the user can go through the email
+11. Once a user clicks a song it plays and the user can go through the playlist
