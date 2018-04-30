@@ -132,7 +132,8 @@ window.onSpotifyWebPlaybackSDKReady = () => {
       let newPlaylist = $('<div/>', {
         id: newName,
         href: '#'+newName,
-        text: newName
+        text: newName,
+        css: { 'height': '50px'}
       }).droppable();
 
       $(newPlaylist).on('drop', function(event, ui) {
